@@ -1,0 +1,82 @@
+<!--
+Matric Number: A173586
+Name: Mohamed Shameer Ali
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Assignment 1</title>
+</head>
+<body>
+<h1>Assignment 1</h1>
+<hr>
+<form>
+  <table border="1" cellpadding="10">
+    <tr>
+      <td>Name:</td>
+      <td><input type="text" name="name" placeholder="Insert your name" autofocus required="" pattern="[A-Z]+"></td>
+    </tr>
+    <tr>
+      <td>Age:</td>
+      <td><input type="number" name="age" min="17" max="100" step="1" required=""></td>
+    </tr>
+    <tr>
+      <td>Sex:</td>
+      <td><input type="radio" name="sex" value="male" >Male<br>
+          <input type="radio" name="sex" value="female" required="">Female</td>
+    </tr>
+    <tr>
+      <td>Address:</td>
+      <td><textarea name="address" cols="50" rows="5" placeholder="Insert your address" required="">Putrajaya</textarea></td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td><input type="email" name="email" placeholder="Insert your email" required="" pattern="^.+@gmail\.com$"></td>
+    </tr>
+    <tr>
+      <td>Date of Birth:</td>
+      <td><input type="date" name="dob" required=""></td>
+    </tr>
+    <tr>
+      <td>Height:</td>
+      <td><input type="range" name="height" id="heightId" min = "100" max = "200" value = "150" oninput="outputId.value = heightId.value" required="" disabled=""><output id="outputId">150</output>cm
+    </tr>
+    <tr>
+      <td>Tel:</td>
+      <td><input type="tel" name="phone" placeholder="+60##-#######" pattern="[+]601[0-9]{1}-[0-9]{8}" autofocus="" required=""><br>Example: +60123456789</td>
+    </tr>
+    <tr>
+      <td>My Favorite Color:</td>
+      <td><input type="color" name="color" required=""></td>
+    </tr>
+    <tr>
+      <td>FB/TW/IG:</td>
+      <td><input type="url" name="fbtwig" placeholder="Insert the URL" required=""></td>
+    </tr>
+    <tr>
+      <td>My Face Photo:</td>
+      <td><input type="file" name="photo" required=""></td>
+    </tr>
+    <tr>
+      <td>My University:</td>
+      <td>
+        <select name="university" required="" size="6">
+          <option value="" selected>Select</option>
+          <option value="UM">Universiti Putra Malaysia</option>
+          <option value="UKM">Universiti Kebangsaan Malaysia</option>
+          <option value="UM">Universiti Malaya</option>
+          <option value="UM">Universiti Sains Malaysia</option>
+          <option value="UM">Universiti Teknologi Malaysia</option>
+        </select>
+      </td>
+    </tr>
+
+  </table>
+<hr>
+<input type="hidden" name="matricnum" value="a173586">
+<input type="submit" name="biodata_form" value="OK" formaction="http://lrgs.ftsm.ukm.my/users/a123456/week3lab/validate_biodata.php" formmethod="post" formenctype="multipart/form-data">
+<input type="reset">
+</form>
+ 
+</body>
+</html>

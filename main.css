@@ -276,6 +276,10 @@ svg {
 	margin-bottom: -3px;
 }
 
+ion-icon {
+  pointer-events: none;
+}
+
 
 #foot{
 	background: linear-gradient(-45deg, #C6FFDD, #FBD786, #f7797d);
