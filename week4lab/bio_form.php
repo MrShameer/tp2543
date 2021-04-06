@@ -2,7 +2,11 @@
  
 $univ = array
   (
-  array("name"=>"Universiti Putra Malaysia","abb"=>"UPM")
+  array("name"=>"Universiti Putra Malaysia","abb"=>"UPM"),
+  array("name"=>"Universiti Kebangsaan Malaysia","abb"=>"UKM"),
+  array("name"=>"Universiti Malaya","abb"=>"UM"),
+  array("name"=>"Universiti Sains Malaysia","abb"=>"USM"),
+  array("name"=>"Universiti Teknologi Malaysia","abb"=>"UTM")
   // insert other universities here
   );
  
@@ -52,7 +56,7 @@ $univ = array
     </tr>
     <tr>
       <td>Tel:</td>
-      <td><input type="tel" name="phone" pattern="\+60\d{2}-\d{7}" placeholder="+60##-#######"></td>
+      <td><input type="tel" name="phone" pattern="\+60\d{2}-(\d{7}|\d{8})" placeholder="+60##-#######"></td>
     </tr>
     <tr>
       <td>My Favorite Color:</td>
@@ -65,7 +69,7 @@ $univ = array
     <tr>
       <td>My University:</td>
       <td>
-        <select name="university">
+        <select name="univ">
           <option value="" selected>Select</option>
           <?php
           foreach ($univ as $u) {
