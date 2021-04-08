@@ -7,17 +7,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="main.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 	<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<style>
-		body {
-				font: 20px Montserrat, sans-serif;
-				line-height: 1.8;
-				overflow: hidden;
-				color: white;
-		}
 		p {font-size: 16px;}
 		.margin {margin-bottom: 35px;}
 		.container-fluid {
@@ -35,7 +30,7 @@
 
 	<div class="container-fluid text-center" id="home">
 		<h2 class="margin">TP2543 Web Programming Deliverables</h2>
-		<img src="ali.jpg" width="20%" height="20%" class="img-responsive img-circle margin" style="display:inline">
+		<img src="ali.jpg" width="15%" height="15%" class="img-responsive img-circle margin" style="display:inline">
 		<h3 class="name">A173586 - Mohamed Shameer Ali</h3>
 	</div>
 
@@ -49,6 +44,7 @@
 			camera.position.z = 1;
 			camera.rotation.x = Math.PI/2;
 			renderer = new THREE.WebGLRenderer();
+			renderer.setClearColor("#0d0d0d");
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			document.body.appendChild(renderer.domElement);
 			starGeo = new THREE.Geometry();
@@ -107,7 +103,7 @@
 		}
 
 		$(window).on("load",function(){
-			setTimeout(next, 2000);
+			setTimeout(next, 1000);
 		});
 	</script>
 
@@ -259,7 +255,91 @@
 				</footer>
 		</div>
 
-	</div>  
+	</div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/egg.js/1.0/egg.min.js"></script>
+	<script type="text/javascript">
+		var egg = new Egg("up,down,left,right", function() {
+			var mouse = {x: 0, y: 0};
+			$(".scrl").hide("slow");
+			$("#home").hide("slow");
+			//ni space ship tu
+		
+			var geometry = new THREE.BoxGeometry(1, 1, 1);
+			var material = new THREE.MeshLambertMaterial({color: 0xF7F4F7});
+			var mesh = new THREE.Mesh(geometry, material);
+			//mesh.position.set(0,4,0);
+			scene.add(mesh);
+
+			var emitter = new THREE.Object3D();
+			camera.add(emitter);
+
+			var light = new THREE.PointLight(0xFFFFFF, 1, 200)
+			light.position.set(1,0,5);
+			scene.add(light);
+			//dah
+			document.addEventListener('mousemove', onMouseMove, false);
+
+			function onMouseMove(event) {
+				event.preventDefault();
+				mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+				mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+				var vector = new THREE.Vector3(mouse.x, mouse.y, 0.5);
+				vector.unproject( camera );
+				var dir = vector.sub( camera.position ).normalize();
+				var distance = - camera.position.z / dir.z;
+				var pos = camera.position.clone().add( dir.multiplyScalar( distance ) );
+				mesh.position.copy(pos);
+
+				//let position = new THREE.Vector3();
+				//position.getPositionFromMatrix( mesh.matrixWorld );
+				emitter.position.set(mouse.x,mouse.y,0.5);
+			};
+
+
+			var plasmaBalls = [];
+			window.addEventListener("mousedown", onMouseDown);
+
+			function onMouseDown() {
+				let plasmaBall = new THREE.Mesh(new THREE.SphereGeometry(0.5, 8, 4), new THREE.MeshBasicMaterial({
+				 color: "aqua"
+				}));
+				plasmaBall.position.copy(emitter.getWorldPosition()); // start position - the tip of the weapon
+				plasmaBall.quaternion.copy(camera.quaternion); // apply camera's quaternion
+				scene.add(plasmaBall);
+				plasmaBalls.push(plasmaBall);
+			}
+
+			
+
+			var speed = 50;
+			var clock = new THREE.Clock();
+			var delta = 0;
+
+			
+			var render = function(){
+				requestAnimationFrame(render);
+				//mesh.rotation.y += 0.003;
+					//console.log(model.rotation.y);
+				//controls.update();
+				delta = clock.getDelta();
+				plasmaBalls.forEach(b => {
+				b.translateZ(-speed * delta); // move along the local z-axis
+				});
+				renderer.render(scene, camera);
+			}
+
+			render();
+
+			//tamat
+			window.setTimeout(function() {
+				//main smpai bile2
+			}, 1000);
+		}).listen();
+
+
+	</script>
 
 </body>
 </html>

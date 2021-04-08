@@ -3,6 +3,10 @@ html{
 	overflow-x: hidden;
 }
 body {
+	font: 20px  Montserrat, sans-serif;
+	line-height: 1.8;
+	overflow: hidden;
+	color: white;
 	margin: 0; 
 	height: 100vh;
 }
@@ -131,7 +135,7 @@ canvas {
 
 /*line sebelum dan selepas perkataan tu*/
 .divi {
-	 font-family: "Share Tech Mono", monospace;
+	 font-family: Concert One, monospace;
 	 color: #fff;
 	 font-size: 5vh;
 	 text-shadow: 1px 1px 1px rgba(0, 0, 0, .45);
