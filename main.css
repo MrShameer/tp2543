@@ -3,7 +3,7 @@ html{
 	overflow-x: hidden;
 }
 body {
-	font: 20px  Montserrat, sans-serif;
+	font: 20px Concert One, Montserrat, sans-serif;
 	line-height: 1.8;
 	overflow: hidden;
 	color: white;
@@ -18,14 +18,7 @@ canvas {
 	left: 0;
 	z-index: -9999;
 }
-.text-box {
-	font-size: 60px;
-	font-family: 'Raleway', sans-serif;
-	letter-spacing: 7px;
-	word-spacing: 12px;
-	text-transform: uppercase;
-	color:rgb(238, 238, 238);
-}
+
 .button-wrapper {
 	display: flex;
 	justify-content: center;
@@ -45,6 +38,19 @@ canvas {
 	border: 1px solid white;
 	background: black;
 	cursor: pointer;
+}
+
+.container-fluid {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.margin {
+	margin-bottom: 35px;
+}
+
+p {
+	font-size: 16px;
 }
 
 

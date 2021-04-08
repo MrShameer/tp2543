@@ -27,7 +27,7 @@ body{
 a{
 	position: relative;
 	width: 320px;
-	height: 400px;
+	height: 300px;
 	color: #fff;
 	background: #111;
 	display: flex;
@@ -35,9 +35,11 @@ a{
 	align-items: center;
 	margin: 20px 30px;
 	transition: 0.5s;
+
 }
 
 a:hover{
+	text-decoration: none;
 	transform: translate(-20px);
 }
 
@@ -103,4 +105,5 @@ h2{
 	font-size: 2em;
 	color: #fff;
 	margin-bottom: 10px;
+	text-decoration: none;
 }

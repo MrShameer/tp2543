@@ -12,26 +12,17 @@
 	<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<style>
-		p {font-size: 16px;}
-		.margin {margin-bottom: 35px;}
-		.container-fluid {
-				padding-top: 20px;
-				padding-bottom: 20px;
-		}
-	</style>
 </head>
 
 <body>
-
 	<div class="loader-wrapper">
-			<div class="water"></div>
+		<div class="water"></div>
 	</div>
 
 	<div class="container-fluid text-center" id="home">
 		<h2 class="margin">TP2543 Web Programming Deliverables</h2>
 		<img src="ali.jpg" width="15%" height="15%" class="img-responsive img-circle margin" style="display:inline">
-		<h3 class="name">A173586 - Mohamed Shameer Ali</h3>
+		<h3 class="name">A173586 <br><br> Mohamed Shameer Ali</h3>
 	</div>
 
 	<script src="three.min.js"></script>
@@ -108,18 +99,40 @@
 	</script>
 
 
-
 	<div class="scrl">
 		<div class="container-fluid text-center">
 			<div class="divi" id="lab">LABORATORY</div>
 			<div class="container mt-5">
 				<section class="text-center">
 					<div class="row mb-4 justify-content-center" id="add0"></div>
-					<div class="row mb-4 justify-content-center" id="add3"></div>
-					<div class="row mb-4 justify-content-center" id="add6"></div>
-					<div class="row mb-4 justify-content-center" id="add9"></div>
 				</section>
 			</div>
+		</div>
+
+
+		<div class="container">
+			<div class="divi" id="assignment">ASSIGMENT</div>
+			<!--section class="text-center mb-4" id="mdb-sarv"-->
+				<div class="row justify-content-center" id="as">
+				<!--div id="a1">
+						<--h3>Assignment #1</h3>
+						<p>My task is to create a...</p>
+						<a href="Assignment/a173586.html" class="btn btn-default">
+							<span class="glyphicon glyphicon-zoom-in"></span> View
+						</a->
+				</div>
+
+								
+			
+				<div id="a2">
+						<---h3>Assignment #2</h3>
+						<p>Describe the assignment here.</p>
+						<a href="#" class="btn btn-default">
+							<span class="glyphicon glyphicon-zoom-in"></span> View
+						</a->
+				</div-->
+			</div>
+			<!--/section-->
 		</div>
 
 		<script>
@@ -141,9 +154,20 @@
 			}
 
 			function getItemBlock(a,b,c) {
+				let y=4,k="";
+				
+				if(!a.includes("Week")){
+					y=6;
+					k=a;
+					a=b;
+				}
+				else{
+					k=a.replace(/\s/g, '').toLowerCase()+'lab'
+					a+=" Lab";
+				}
 				let adds=[
-								'<div class="col-lg-4 col-md-12 mb-8 mb-lg-0" id="marg">',
-								'<a href=\"'+a.replace(/\s/g, '').toLowerCase()+'lab\">',
+								'<div class="col-lg-'+y+' col-md-12 mb-8 mb-lg-0" id="marg">',
+								'<a href=\"'+k+'\">',
 								'<div class=\"content\">',
 								'<svg viewBox=\"0 0 1400 280\">',
 								'<symbol id=\"s-text'+b+'\">',
@@ -156,7 +180,7 @@
 								'<use xlink:href=\"#s-text'+b+'\" class=\"text\"style=\"stroke:'+collist()+'\"><\/use>',
 								'<\/svg>',
 								'<\/div>',
-								'<h5>'+a+' Lab<\/h5>',
+								'<h5>'+a+'<\/h5>',
 								'<h4><strong>'+c+'<\/strong><\/h4>',
 								'<\/a>',
 								'<\/div>']
@@ -165,41 +189,21 @@
 			}
 
 			let i;
-			for (i=0; i < lab.length; i+=3) {
-				for (j=0; j < 3; j++) {
+			/*for (i=0; i < lab.length; i+=3){
+				for (j=0; j < 3; j++){
 					if(i+j<lab.length){
-						$(String('#'+'add'+i)).append(getItemBlock(String(labs[i+j]),String(lab[i+j]),String(names[i+j])));
+						$(String('#'+'add'+0)).append(getItemBlock(String(labs[i+j]),String(lab[i+j]),String(names[i+j])));
 					}
 				}
+			}*/
+
+			for(i=0;i<lab.length;i+=1){
+				$(String('#add0')).append(getItemBlock(String(labs[i]),String(lab[i]),String(names[i])));
 			}
+
+			$(String('#as')).append(getItemBlock(String('assignment/a173586.html'),String('Assigment 1'),String('Enhanced Biodata Form')));
+			$(String('#as')).append(getItemBlock(String('assignment'),String('Assigment 2'),String('')));
 		</script>
-
-
-		<div class="container">
-			<div class="divi" id="assignment">ASSIGMENT</div>
-			<section class="text-center mb-4" id="mdb-sarv">
-				<div class="row mb-4 justify-content-center">
-					<div class="col-md-6 col-mb">
-						<h3>Assignment #1</h3>
-						<p>My task is to create a...</p>
-						<a href="Assignment/a173586.html" class="btn btn-default">
-							<span class="glyphicon glyphicon-zoom-in"></span> View
-						</a>
-					</div>
-			
-
-					<div class="col-md-6 col-mb">
-						<h3>Assignment #2</h3>
-						<p>Describe the assignment here.</p>
-						<a href="#" class="btn btn-default">
-							<span class="glyphicon glyphicon-zoom-in"></span> View
-						</a>
-					</div>
-				</div>
-			</section>
-		</div>
-
-
 		
 		<div class="container-fluid text-center">  
 			<div class="divi" id="project">PROJECT</div>
@@ -268,7 +272,7 @@
 			var geometry = new THREE.BoxGeometry(1, 1, 1);
 			var material = new THREE.MeshLambertMaterial({color: 0xF7F4F7});
 			var mesh = new THREE.Mesh(geometry, material);
-			//mesh.position.set(0,4,0);
+			//mesh.position.set(0,4,0); //takyah letak sebab ikut mouse
 			scene.add(mesh);
 
 			var emitter = new THREE.Object3D();
@@ -297,7 +301,6 @@
 				emitter.position.set(mouse.x,mouse.y,0.5);
 			};
 
-
 			var plasmaBalls = [];
 			window.addEventListener("mousedown", onMouseDown);
 
@@ -305,13 +308,11 @@
 				let plasmaBall = new THREE.Mesh(new THREE.SphereGeometry(0.5, 8, 4), new THREE.MeshBasicMaterial({
 				 color: "aqua"
 				}));
-				plasmaBall.position.copy(emitter.getWorldPosition()); // start position - the tip of the weapon
-				plasmaBall.quaternion.copy(camera.quaternion); // apply camera's quaternion
+				plasmaBall.position.copy(emitter.getWorldPosition());
+				plasmaBall.quaternion.copy(camera.quaternion);
 				scene.add(plasmaBall);
 				plasmaBalls.push(plasmaBall);
 			}
-
-			
 
 			var speed = 50;
 			var clock = new THREE.Clock();
@@ -325,7 +326,7 @@
 				//controls.update();
 				delta = clock.getDelta();
 				plasmaBalls.forEach(b => {
-				b.translateZ(-speed * delta); // move along the local z-axis
+				b.translateZ(-speed * delta);
 				});
 				renderer.render(scene, camera);
 			}
@@ -337,8 +338,6 @@
 				//main smpai bile2
 			}, 1000);
 		}).listen();
-
-
 	</script>
 
 </body>
