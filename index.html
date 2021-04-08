@@ -154,22 +154,24 @@
 			}
 
 			function getItemBlock(a,b,c) {
-				let y=4,k="";
+				let y=4,k="",s="";
 				
 				if(!a.includes("Week")){
 					y=6;
 					k=a;
 					a=b;
+					s="1700 280";
 				}
 				else{
-					k=a.replace(/\s/g, '').toLowerCase()+'lab'
+					s="1400 280";
+					k=a.replace(/\s/g, '').toLowerCase()+'lab';
 					a+=" Lab";
 				}
 				let adds=[
 								'<div class="col-lg-'+y+' col-md-12 mb-8 mb-lg-0" id="marg">',
 								'<a href=\"'+k+'\">',
 								'<div class=\"content\">',
-								'<svg viewBox=\"0 0 1400 280\">',
+								'<svg viewBox=\"0 0 '+s+'\">',
 								'<symbol id=\"s-text'+b+'\">',
 								'<text text-anchor=\"middle\" x=\"50%\" y=\"50%\" dy=\".35em\">'+b+'<\/text>',
 								'<\/symbol>',
@@ -180,11 +182,12 @@
 								'<use xlink:href=\"#s-text'+b+'\" class=\"text\"style=\"stroke:'+collist()+'\"><\/use>',
 								'<\/svg>',
 								'<\/div>',
+								'<center>',
 								'<h5>'+a+'<\/h5>',
 								'<h4><strong>'+c+'<\/strong><\/h4>',
+								'</center>',
 								'<\/a>',
 								'<\/div>']
-				//stroke: #F2385A;
 				return adds.join('\n');
 			}
 
