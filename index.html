@@ -1,3 +1,7 @@
+<!--
+Matric Number: A173586
+Name: Mohamed Shameer Ali
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,10 +23,22 @@
 		<div class="water"></div>
 	</div>
 
+	<script>
+		function next(){
+			$(".loader-wrapper").fadeOut("slow");
+			var x = document.getElementsByTagName("BODY")[0];
+			x.style.overflow="auto";
+		}
+
+		$(window).on("load",function(){
+			setTimeout(next, 1000);
+		});
+	</script>
+
 	<div class="container-fluid text-center" id="home">
-		<h2 class="margin">TP2543 Web Programming Deliverables</h2>
-		<img src="ali.jpg" width="15%" height="15%" class="img-responsive img-circle margin" style="display:inline">
-		<h3 class="name">A173586 <br><br> Mohamed Shameer Ali</h3>
+		<h2 class="margin" style="font-size: 40px;">TP2543 Web Programming Deliverables</h2>
+		<img src="pics/ali.jpg" width="15%" height="15%" class="img-responsive img-circle margin" style="display:inline">
+		<h3 class="name" style="font-size: 40px;">A173586 <br><br> Mohamed Shameer Ali</h3>
 	</div>
 
 	<script src="three.min.js"></script>
@@ -50,7 +66,7 @@
 				starGeo.vertices.push(star);
 			}
 
-			let sprite = new THREE.TextureLoader().load('star.png');
+			let sprite = new THREE.TextureLoader().load('pics/star.png');
 			let starMaterial = new THREE.PointsMaterial({
 				color: 0xaaaaaa,
 				size: 0.7,
@@ -86,18 +102,6 @@
 		init();
 	</script>
 
-	<script>
-		function next(){
-			$(".loader-wrapper").fadeOut("slow");
-			var x = document.getElementsByTagName("BODY")[0];
-			x.style.overflow="auto";
-		}
-
-		$(window).on("load",function(){
-			setTimeout(next, 1000);
-		});
-	</script>
-
 
 	<div class="scrl">
 		<div class="container-fluid text-center">
@@ -109,30 +113,15 @@
 			</div>
 		</div>
 
-
 		<div class="container">
 			<div class="divi" id="assignment">ASSIGMENT</div>
-			<!--section class="text-center mb-4" id="mdb-sarv"-->
-				<div class="row justify-content-center" id="as">
-				<!--div id="a1">
-						<--h3>Assignment #1</h3>
-						<p>My task is to create a...</p>
-						<a href="Assignment/a173586.html" class="btn btn-default">
-							<span class="glyphicon glyphicon-zoom-in"></span> View
-						</a->
-				</div>
+			<div class="row justify-content-center" id="as"></div>
+		</div>
 
-								
-			
-				<div id="a2">
-						<---h3>Assignment #2</h3>
-						<p>Describe the assignment here.</p>
-						<a href="#" class="btn btn-default">
-							<span class="glyphicon glyphicon-zoom-in"></span> View
-						</a->
-				</div-->
-			</div>
-			<!--/section-->
+		<div class="container text-center">  
+			<div class="divi" id="project">PROJECT</div>
+			<p class="margin">My project to develop a web-based back office system for a company that sells ???. Describe your project here.</p>
+			<div class="row" id="proj"></div>
 		</div>
 
 		<script>
@@ -140,7 +129,7 @@
 			var labs=["Week 2","Week 3"," Week 4","Week 5","Week 6","Week 7","Week 9","Week 10","Week 11","Week 13","Week 14"];
 
 			var names=["BASIC HTML","HTML FORM","BASIC PHP","MySQL & PHP","ADVANCE PHP & SESSION","CODEIGNITE FRAMEWORK","BASIC CSS","BOOTSTRAP","JAVASCRIPT","JQUERY","AJAX"];
-			//var col ='#' + Math.floor(Math.random()*16777215).toString(16);
+
 			var listc =['#e6194B', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#42d4f4', '#f032e6', '#bfef45', '#fabed4', '#469990', '#dcbeff', '#fffac8', '#aaffc3', '#808000', '#ffd8b1', '#f2385A', '#F5A503', '#E9F1DF', '#56D9CD', '#3aa1bf'];
 
 			var fix=['#F2385A', '#F5A503', '#E9F1DF', '#56D9CD','#3aa1bf'];
@@ -153,113 +142,69 @@
 				return listc[Math.floor(Math.random() * listc.length)];
 			}
 
-			function getItemBlock(a,b,c) {
-				let y=4,k="",s="";
-				
-				if(!a.includes("Week")){
-					y=6;
-					k=a;
-					a=b;
-					s="1700 280";
-				}
-				else{
-					s="1400 280";
-					k=a.replace(/\s/g, '').toLowerCase()+'lab';
-					a+=" Lab";
-				}
+			function makeblock(anc,_svg,_h5,sz,span,nm) {
 				let adds=[
-								'<div class="col-lg-'+y+' col-md-12 mb-8 mb-lg-0" id="marg">',
-								'<a href=\"'+k+'\">',
-								'<div class=\"content\">',
-								'<svg viewBox=\"0 0 '+s+'\">',
-								'<symbol id=\"s-text'+b+'\">',
-								'<text text-anchor=\"middle\" x=\"50%\" y=\"50%\" dy=\".35em\">'+b+'<\/text>',
-								'<\/symbol>',
-								'<use xlink:href=\"#s-text'+b+'\" class=\"text\"style=\"stroke:'+collist()+'\"><\/use>',
-								'<use xlink:href=\"#s-text'+b+'\" class=\"text\"style=\"stroke:'+collist()+'\"><\/use>',
-								'<use xlink:href=\"#s-text'+b+'\" class=\"text\"style=\"stroke:'+collist()+'\"><\/use>',
-								'<use xlink:href=\"#s-text'+b+'\" class=\"text\"style=\"stroke:'+collist()+'\"><\/use>',
-								'<use xlink:href=\"#s-text'+b+'\" class=\"text\"style=\"stroke:'+collist()+'\"><\/use>',
-								'<\/svg>',
-								'<\/div>',
-								'<center>',
-								'<h5>'+a+'<\/h5>',
-								'<h4><strong>'+c+'<\/strong><\/h4>',
-								'</center>',
-								'<\/a>',
-								'<\/div>']
+							'<div class="col-lg-'+span+' col-md-12 mb-8 mb-lg-0" id="marg">',
+							'<a href="'+anc+'">',
+							'<div class="content">',
+							'<svg viewBox="0 0 '+sz+'">',
+							'<symbol id="s-text'+_svg+'">',
+							'<text text-anchor="middle" x="50%" y="50%" dy=".35em">'+_svg+'</text>',
+							'</symbol>',
+							'<use xlink:href="#s-text'+_svg+'" class="text"style="stroke:'+collist()+'"></use>',
+							'<use xlink:href="#s-text'+_svg+'" class="text"style="stroke:'+collist()+'"></use>',
+							'<use xlink:href="#s-text'+_svg+'" class="text"style="stroke:'+collist()+'"></use>',
+							'<use xlink:href="#s-text'+_svg+'" class="text"style="stroke:'+collist()+'"></use>',
+							'<use xlink:href="#s-text'+_svg+'" class="text"style="stroke:'+collist()+'"></use>',
+							'</svg>',
+							'</div>',
+							'<center>',
+							'<h5>'+_h5+'</h5>',
+							'<h4><strong>'+nm+'</strong></h4>',
+							'</center>',
+							'</a>',
+							'</div>']
 				return adds.join('\n');
 			}
-
+			//lab tu
 			let i;
-			/*for (i=0; i < lab.length; i+=3){
-				for (j=0; j < 3; j++){
-					if(i+j<lab.length){
-						$(String('#'+'add'+0)).append(getItemBlock(String(labs[i+j]),String(lab[i+j]),String(names[i+j])));
-					}
-				}
-			}*/
-
 			for(i=0;i<lab.length;i+=1){
-				$(String('#add0')).append(getItemBlock(String(labs[i]),String(lab[i]),String(names[i])));
+				$(String('#add0')).append(makeblock(String(labs[i]).replace(/\s/g, '').toLowerCase()+'lab', String(lab[i]), String(String(labs[i])+' Lab'), "1400 280", 4, String(names[i])));
 			}
 
-			$(String('#as')).append(getItemBlock(String('assignment/a173586.html'),String('Assigment 1'),String('Enhanced Biodata Form')));
-			$(String('#as')).append(getItemBlock(String('assignment'),String('Assigment 2'),String('')));
+			//assignment tu
+			$(String('#as')).append(makeblock(String('assignment/a173586.html'), String('Assigment 1'), String('Assigment 1'), "1700 280", 6, String('Enhanced Biodata Form')));
+			$(String('#as')).append(makeblock(String('assignment/'), String('Assigment 2'), String('Assigment 2'), "1700 280", 6, String('......')));
+
+			//project la
+			let pr=["HTML","PHP & DATABASE","JAVASCRIPT & BOOTSTRAP","FINAL"];
+			for(i=0;i<pr.length;i++){
+				$(String('#proj')).append(makeblock(String('project/'), String('Project '+(i+1)), String('Project Task '+(i+1)), "2000 280", 6, String(pr[i])));
+			}
 		</script>
-		
-		<div class="container-fluid text-center">  
-			<div class="divi" id="project">PROJECT</div>
-			<p class="margin">My project to develop a web-based back office system for a company that sells ???. Describe your project here.</p>
-			<div class="row">
-				<div class="col-sm-3">
-					<p>Project Task #1 - HTML</p>
-					<a href="#" class="btn btn-default">
-						<span class="glyphicon glyphicon-zoom-in"></span> Open
-					</a>
-				</div>
-				<div class="col-sm-3">
-					<p>Project Task #2 - PHP and Database</p>
-					<a href="#" class="btn btn-default">
-						<span class="glyphicon glyphicon-zoom-in"></span> Open
-					</a>
-				</div>
-				<div class="col-sm-3">
-					<p>Project Task #3 - JavaScript and Bootstrap</p>
-					<a href="#" class="btn btn-default">
-						<span class="glyphicon glyphicon-zoom-in"></span> Open
-					</a>
-				</div>
-				<div class="col-sm-3">
-					<p>Project Task - Final</p>
-					<a href="#" class="btn btn-default">
-						<span class="glyphicon glyphicon-zoom-in"></span> Open
-					</a>
-				</div>
-			</div>
-		</div>
+	
 
 		<div class="footer-basic" id="foot">
-				<footer>
-						<div class="social">
-							<a title="Instagram" href="https://www.instagram.com/mrshameer/" target="_blank">
-								<i class="icon ion-social-instagram" ></i>
-							</a>
-							<a title="Github" href="https://github.com/MrShameer" target="_blank">
-								<ion-icon name="logo-github" id="disc"></ion-icon>
-							</a>
-							<a title="Discord" href="https://discordapp.com/users/187213528753635328/" target="_blank">
-								<ion-icon name="logo-discord" id="disc"></ion-icon>
-							</a>
-						</div>
-						<ul class="list-inline">
-								<li class="list-inline-item"><a href="#home">Home</a></li>
-								<li class="list-inline-item"><a href="#lab">Labs</a></li>
-								<li class="list-inline-item"><a href="#assignment">Assignments</a></li>
-								<li class="list-inline-item"><a href="#project">Projects</a></li>
-						</ul>
-						<p class="copyright">© 2021 Copyright: Shameer Ali for TP2543 Web Programming . FTSM . UKM</p>
-				</footer>
+			<footer>
+				<div class="social">
+					<a title="Instagram" href="https://www.instagram.com/mrshameer/" target="_blank">
+						<i class="icon ion-social-instagram" ></i>
+					</a>
+					<a title="Github" href="https://github.com/MrShameer" target="_blank">
+						<ion-icon name="logo-github" id="disc"></ion-icon>
+					</a>
+					<a title="Discord" href="https://discordapp.com/users/187213528753635328/" target="_blank">
+						<ion-icon name="logo-discord" id="disc"></ion-icon>
+					</a>
+				</div>
+				<ul class="list-inline">
+					<li class="list-inline-item"><a href="#home">Home</a></li>
+					<li class="list-inline-item"><a href="#lab">Labs</a></li>
+					<li class="list-inline-item"><a href="#assignment">Assignments</a></li>
+					<li class="list-inline-item"><a href="#project">Projects</a></li>
+				</ul>
+				<p class="copyright">© 2021 Copyright: Shameer Ali for TP2543 Web Programming . FTSM . UKM</p>
+			</footer>
 		</div>
 
 	</div>
@@ -321,7 +266,6 @@
 			var clock = new THREE.Clock();
 			var delta = 0;
 
-			
 			var render = function(){
 				requestAnimationFrame(render);
 				//mesh.rotation.y += 0.003;
@@ -333,7 +277,6 @@
 				});
 				renderer.render(scene, camera);
 			}
-
 			render();
 
 			//tamat
@@ -341,7 +284,13 @@
 				//main smpai bile2
 			}, 1000);
 		}).listen();
-	</script>
 
+		$(document).on('keypress',function(e) {
+			if(e.which == 13) {
+				alert('You pressed enter!');
+			}
+			console.log(e.which);
+		});
+	</script>
 </body>
 </html>

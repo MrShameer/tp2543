@@ -74,7 +74,7 @@ a:nth-child(3)::after{
 	background: linear-gradient(315deg, #4dff03, #00d0ff);
 }
 
-a span{
+/*a span{
 	position: absolute;
 	top: 6px;
 	left: 6px;
@@ -94,7 +94,7 @@ a span::before{
 	background: rgba(255,255,255,0.1);
 	pointer-events: none;
 }
-
+*/
 a .content{
 	position: relative;
 	z-index: 10;
