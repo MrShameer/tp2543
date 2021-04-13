@@ -40,7 +40,7 @@ a{
 
 a:hover{
 	text-decoration: none;
-	transform: translate(-20px);
+	transform: translate(0,-20px);
 }
 
 a:before{
@@ -106,4 +106,5 @@ h2{
 	color: #fff;
 	margin-bottom: 10px;
 	text-decoration: none;
+	text-align: center;
 }

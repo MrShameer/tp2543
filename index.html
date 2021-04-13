@@ -270,13 +270,13 @@ Name: Mohamed Shameer Ali
 				requestAnimationFrame(render);
 
 				if(camera.fov>=30){
-					//camera.fov -= 0.05;
-					//camera.updateProjectionMatrix();
+					camera.fov -= 0.05;
+					//camera.aspect = (window.innerWidth*2) / (window.innerHeight*2);
+					mesh.scale.x -= 0.0003;
+					mesh.scale.y -= 0.0003;
+					mesh.scale.z -= 0.0003;
+					camera.updateProjectionMatrix();
 				}
-				
-				//mesh.scale.x -= 0.003;
-				//mesh.scale.y -= 0.003;
-				//mesh.scale.z -= 0.003;
 
 				
 				//mesh.rotation.y += 0.003;
