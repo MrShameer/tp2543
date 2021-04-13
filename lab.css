@@ -73,6 +73,21 @@ a:nth-child(3)::before,
 a:nth-child(3)::after{
 	background: linear-gradient(315deg, #4dff03, #00d0ff);
 }
+
+a:nth-child(4)::before,
+a:nth-child(4)::after{
+	background: linear-gradient(315deg, #43C6AC, #191654);
+}
+
+a:nth-child(5)::before,
+a:nth-child(5)::after{
+	background: linear-gradient(315deg, #EB5757, #000000);
+}
+
+a:nth-child(6)::before,
+a:nth-child(6)::after{
+	background: linear-gradient(315deg, #a80077, #66ff00);
+}
 /*
 a span{
 	position: absolute;
