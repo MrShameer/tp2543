@@ -57,11 +57,12 @@ else {
   </select>
   <br>
   I like your :<br>
-  <input type="checkbox" id="tick1" name="tick[]" value="frontpage" <?php echo (strpos($result["tick"], 'frontpage')===0 ? 'checked' : '');?>>
+  <? echo $result["tick"];?>
+  <input type="checkbox" id="tick1" name="tick[]" value="frontpage" <?php echo (strpos($result["tick"], 'frontpage')!== false ? 'checked' : '');?>>
   <label for="tick1">Front Page</label><br>
-  <input type="checkbox" id="tick2" name="tick[]" value="form" <?php echo (strpos($result["tick"], 'form')===0 ? 'checked' : '');?>>
+  <input type="checkbox" id="tick2" name="tick[]" value="form" <?php echo (strpos($result["tick"], 'form')!== false ? 'checked' : '');?>>
   <label for="tick2">Form</label><br>
-  <input type="checkbox" id="tick3" name="tick[]" value="userinterface" <?php echo (strpos($result["tick"], 'userinterface')===1 ? 'checked' : '');?>>
+  <input type="checkbox" id="tick3" name="tick[]" value="userinterface" <?php echo (strpos($result["tick"], 'userinterface')!== false ? 'checked' : '');?>>
   <label for="tick3">User Interface</label><br><br>
 
 

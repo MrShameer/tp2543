@@ -8,15 +8,19 @@ if (isset($_POST['edit_form'])) {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
        
-    $stmt = $conn->prepare("UPDATE myguestbook SET user = :name, email = :email, comment = :comment WHERE id = :record_id");
+    $stmt = $conn->prepare("UPDATE assignment2 SET user = :name, email = :email, find=:find, tick=:tick, comment = :comment WHERE id = :record_id");
  
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->bindParam(':find', $find, PDO::PARAM_STR);
+    $stmt->bindParam(':tick', $tick, PDO::PARAM_STR);
     $stmt->bindParam(':comment', $comment, PDO::PARAM_STR);
     $stmt->bindParam(':record_id', $id, PDO::PARAM_INT);
        
     $name = $_POST['name'];
     $email = $_POST['email'];
+    $find = $_POST['find'];
+    $tick = implode(" | ",$_POST['tick']);
     $comment = $_POST['comment'];
     $id = $_POST['id'];
  
