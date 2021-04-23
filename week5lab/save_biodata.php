@@ -37,7 +37,7 @@ if (isset($_POST['biodata_validate'])) {
       $fbtwig = $_POST['fbtwig'];
       $univ = $_POST['univ'];
       $matricnum = $_POST['matricnum'];
-       
+
       $stmt->execute();
      
       echo "New records created successfully";

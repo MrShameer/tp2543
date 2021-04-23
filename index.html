@@ -41,6 +41,8 @@ Name: Mohamed Shameer Ali
 		<h3 class="name" style="font-size: 40px;">A173586 <br><br> Mohamed Shameer Ali</h3>
 	</div>
 
+	<button id="light">Light Mode</button>
+
 	<script src="three.min.js"></script>
 
 	<script type="text/javascript">
@@ -181,6 +183,26 @@ Name: Mohamed Shameer Ali
 			for(i=0;i<pr.length;i++){
 				$(String('#proj')).append(makeblock(String('mypt'+(i+1)), String('Project '+(i+1)), String('Project Task '+(i+1)), "2000 280", 6, String(pr[i])));
 			}
+
+
+			var caller = $("#light");
+
+			function foo()
+			{
+			    var randX = Math.floor(Math.random() * (window.innerWidth - 100));
+			    var randY = Math.floor(Math.random() * (window.innerHeight - 100));
+			    caller.stop().animate({"left": randX + "px", "top": randY + "px"});
+
+			}
+
+			$(document).ready(function() {
+			    
+			    caller.on('mouseenter', foo);
+			    caller.on('click', function(){
+			        alert('Sorry no light mode');
+			    });
+			    
+			});
 		</script>
 	
 
@@ -298,7 +320,7 @@ Name: Mohamed Shameer Ali
 
 		$(document).on('keypress',function(e) {
 			if(e.which == 13) {
-				alert('You pressed enter!');
+				//alert('You pressed enter!');
 			}
 			console.log(e.which);
 		});
