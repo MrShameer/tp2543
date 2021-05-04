@@ -49,22 +49,39 @@ else {
 
   How did you find me? 
   <select name="find" id="find">
+
     <option value="From a friend" required>From a friend</option>
     <option value="I google you" required>I google you</option>
     <option value="Just surf on in" required>Just surf on in</option>
     <option value="From your facebook" required>From your facebook</option>
-    <option value="I clicked on ads" required>I clicked on ads</option>
+    <option value="I clicked on ads" required>I clicked on ads</option>z
+
+    <!--option <?php //if ($result["find"]=="From a friend") echo "selected" ?>>From a friend</option>
+    <option <?php// if ($result["find"]=="I googled you") echo "selected" ?>>I googled you</option>
+    <option <?php //if ($result["find"]=="Just surf on in") echo "selected" ?>>Just surf on in</option>
+    <option <?php //if ($result["find"]=="From your Facebook") echo "selected" ?>>From your Facebook</option>
+    <option <?php// if ($result["find"]=="I clicked an ads") echo "selected" ?>>I clicked an ads</option-->
+    <?$("#find").val('I google you');?>
+
   </select>
   <br>
   I like your :<br>
-  <? echo $result["tick"];?>
-  <input type="checkbox" id="tick1" name="tick[]" value="frontpage" <?php echo (strpos($result["tick"], 'frontpage')!== false ? 'checked' : '');?>>
-  <label for="tick1">Front Page</label><br>
-  <input type="checkbox" id="tick2" name="tick[]" value="form" <?php echo (strpos($result["tick"], 'form')!== false ? 'checked' : '');?>>
-  <label for="tick2">Form</label><br>
-  <input type="checkbox" id="tick3" name="tick[]" value="userinterface" <?php echo (strpos($result["tick"], 'userinterface')!== false ? 'checked' : '');?>>
-  <label for="tick3">User Interface</label><br><br>
 
+  <? //echo $result["tick"];?>
+  <!--input type="checkbox" id="tick1" name="tick[]" value="frontpage" <?//php echo (strpos($result["tick"], 'frontpage')!== false ? 'checked' : '');?>>
+  <label for="tick1">Front Page</label><br>
+  <input type="checkbox" id="tick2" name="tick[]" value="form" <?//php echo (strpos($result["tick"], 'form')!== false ? 'checked' : '');?>>
+  <label for="tick2">Form</label><br>
+  <input type="checkbox" id="tick3" name="tick[]" value="userinterface" <?//php echo (strpos($result["tick"], 'userinterface')!== false ? 'checked' : '');?>>
+  <label for="tick3">User Interface</label><br><br-->
+
+  <input type="checkbox" id="tick1" name="front" value="1" <?php if ($result['front']) echo "checked"; ?>>
+  <label for="tick1">Front Page</label>
+  <input type="checkbox" id="tick2" name="form" value="1" <?php if ($result['form']) echo "checked"; ?>>
+  <label for="tick2">Form</label>
+  <input type="checkbox" id="tick3" name="ui" value="1" <?php if ($result['ui']) echo "checked"; ?>>
+  <label for="tick3">User Interface</label>
+  <br />
 
   Comments :<br>
   <textarea name="comment" cols="30" rows="8" required><?php echo $result["comment"]; ?></textarea>

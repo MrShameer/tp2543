@@ -29,14 +29,26 @@ $conn = null;
 <ol>
 <?php
 foreach($result as $row) {
+  $fav = Array();
+
+  if ($row['front'])
+    array_push($fav, "Front page");
+  if ($row['form'])
+    array_push($fav, "Form");
+  if ($row['ui'])
+    array_push($fav, "User interface");
+
   echo "<li>";
   echo "Name : ".$row["user"]."<br>";
   echo "Email : ".$row["email"]."<br>";
 
   echo "How did you find me? : ".$row["find"]."<br>";
-  echo "I like your : ".$row["tick"]."<br>";
+  //echo "I like your : ".$row["tick"]."<br>";
 
-  echo "Date : ".$row["postdate"]."<br>";
+  echo "I like your: ";
+  echo join($fav, ", ");
+
+  echo "<br>Date : ".$row["postdate"]."<br>";
   echo "Time : ".$row["posttime"]."<br>";
   echo "Comments : ".$row["comment"]."<br>";
   echo "Action : <a href=edit.php?id=".$row["id"].">Edit</a> / <a href=delete.php?id=".$row["id"].">Delete</a>";

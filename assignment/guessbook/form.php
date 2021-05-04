@@ -23,12 +23,20 @@
 	</select>
 	<br>
 	I like your :<br>
-	<input type="checkbox" id="tick1" name="tick[]" value="frontpage">
-  <label for="tick1">Front Page</label><br>
-  <input type="checkbox" id="tick2" name="tick[]" value="form">
-  <label for="tick2">Form</label><br>
-  <input type="checkbox" id="tick3" name="tick[]" value="userinterface">
-  <label for="tick3">User Interface</label><br><br>
+	<!--input type="checkbox" id="tick1" name="tick[]" value="frontpage">
+	<label for="tick1">Front Page</label><br>
+	<input type="checkbox" id="tick2" name="tick[]" value="form">
+	<label for="tick2">Form</label><br>
+	<input type="checkbox" id="tick3" name="tick[]" value="userinterface">
+	<label for="tick3">User Interface</label-->
+
+	<input type="checkbox" id="tick1" name="front" value="1">
+	<label for="tick1">Front Page</label><br>
+	<input type="checkbox" id="tick2" name="form" value="1">
+	<label for="tick2">Form</label><br>
+	<input type="checkbox" id="tick3" name="ui" value="1">
+	<label for="tick3">User Interface</label>
+  <br><br>
 	Comments :<br>
 	<textarea name="comment" cols="30" rows="8" required></textarea>
 	<br>
