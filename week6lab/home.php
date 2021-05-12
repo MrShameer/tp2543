@@ -12,7 +12,7 @@
           <p align="center"><strong>My Guestbook</strong></p>
           <p align="center">Date : <?php echo date("d-m-Y",time()); ?></p>
           <p align="center">Time : <?php date_default_timezone_set('Asia/Kuala_Lumpur'); echo date("H:i",time()); ?></p>
-          <p align="center"><a href="form.php">Add</a> | <a href="list.php">List</a></p>
+          <p align="center"><a href="new_form.php">Add</a> | <a href="list.php">List</a></p>
       </td>
     </tr>
   </table>
