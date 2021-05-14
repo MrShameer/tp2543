@@ -14,7 +14,7 @@ include_once 'products_crud.php';
 
 		<form action="products.php" method="post">
 			Product ID
-			<input name="pid" type="text" id="pid" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_id'];?>"> <br>
+			<input name="pid" type="text" id="pid" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_id'];?>" readonly> <br>
 			Name
 			<input name="name" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_name']; ?>" required> <br>
 			Price
@@ -118,7 +118,7 @@ include_once 'products_crud.php';
 				if("<?php echo $num ?>" !== null && "<?php echo $num ?>" !== ""){
 					var pid = document.getElementById("pid");
 					pid.value = "<?php echo $num ?>";
-					pid.readOnly = true;
+					//pid.readOnly = true;
 				}
 
 			</script>
