@@ -81,7 +81,6 @@
           cid.value = "<?php echo $num ?>";
           //cid.readOnly = true;
         }
-
       </script>
     </table>
   </center>

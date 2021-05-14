@@ -120,7 +120,6 @@ include_once 'products_crud.php';
 					pid.value = "<?php echo $num ?>";
 					//pid.readOnly = true;
 				}
-
 			</script>
 		</table>
 	</center>
