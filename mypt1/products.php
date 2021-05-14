@@ -17,11 +17,11 @@
 			<input name="price" type="text"> <br>
 			Type
 			<select name="type">
-				<option value="Hasbro">Action Figure</option>
-				<option value="Lego">Building</option>
-				<option value="Knex">Vehicle</option>
-				<option value="ToysRUs">Weapon</option>
-				<option value="Nintendo">Electronic</option>
+				<option value="Action Figure">Action Figure</option>
+				<option value="Building">Building</option>
+				<option value="Vehicle">Vehicle</option>
+				<option value="Weapon">Weapon</option>
+				<option value="Electronic">Electronic</option>
 				<option value="Other">Other</option>
 			</select> <br>
 			Brand
