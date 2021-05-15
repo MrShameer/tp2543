@@ -107,11 +107,11 @@ include_once 'products_crud.php';
 
 				<?php
 			}
-			if (!isset($_GET['edit'])){
+			if (!isset($_GET['edit'])&&$stmt->rowCount()>0){
 				$num = ltrim($readrow['fld_product_id'], 'P')+1;
 				$num = 'P'.str_pad($num,3,"0",STR_PAD_LEFT);
 			}
-			else{
+			elseif(!isset($_GET['edit'])){
       			$num = 'P'.str_pad(1,3,"0",STR_PAD_LEFT);
       		}
 			$conn = null;
