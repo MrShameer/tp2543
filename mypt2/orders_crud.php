@@ -8,12 +8,13 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 if (isset($_POST['create'])) {
  
   try {
-    $stmt = $conn->prepare("INSERT INTO tbl_orders_a173586(fld_order_id, fld_customer_id, fld_staff_id) VALUES(:oid, :sid, :cid)");
+    $stmt = $conn->prepare("INSERT INTO tbl_orders_a173586(fld_order_id, fld_customer_id, fld_staff_id) VALUES(:oid, :cid, :sid)");
    
     $stmt->bindParam(':oid', $oid, PDO::PARAM_STR);
     $stmt->bindParam(':cid', $cid, PDO::PARAM_STR);
     $stmt->bindParam(':sid', $sid, PDO::PARAM_STR);   
-    $oid = uniqid('O', true);
+   // $oid = uniqid('O', true);
+    $oid = $_POST['oid'];
     $sid = $_POST['sid'];
     $cid = $_POST['cid'];
      
@@ -31,7 +32,7 @@ if (isset($_POST['update'])) {
    
   try {
  
-    $stmt = $conn->prepare("UPDATE tbl_orders_a173586 SET fld_customer_id = :cid, fld_staff_id = :sid, WHERE fld_order_id = :oid");
+    $stmt = $conn->prepare("UPDATE tbl_orders_a173586 SET fld_customer_id = :cid, fld_staff_id = :sid WHERE fld_order_id = :oid");
    
     $stmt->bindParam(':oid', $oid, PDO::PARAM_STR);
     $stmt->bindParam(':cid', $cid, PDO::PARAM_STR);

@@ -4,14 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>My Bike Ordering System : Orders</title>
+	<title>Hypers Ordering System : Orders</title>
 </head>
 <body>
 	<object name="menu" type="text/html" data="menu.html" width="100%" height="50px"></object>
 	<center>
 		<form action="orders.php" method="post">
 			Order ID
-			<input name="oid" type="text" readonly value="<?php if(isset($_GET['edit'])) echo $editrow['fld_order_id']; ?>"> <br>
+			<input name="oid" type="text" id="oid" readonly value="<?php if(isset($_GET['edit'])) echo $editrow['fld_order_id']; ?>"> <br>
 			Order Date
 			<input name="orderdate" type="text" readonly value="<?php if(isset($_GET['edit'])) echo $editrow['fld_order_date']; ?>"> <br>
 			Staff
@@ -55,9 +55,9 @@
 			foreach($result as $custrow) {
 			?>
 				<?php if((isset($_GET['edit'])) && ($editrow['fld_customer_id']==$custrow['fld_customer_id'])) { ?>
-					<option value="<?php echo $custrow['fld_customer_id']; ?>" selected><?php echo $custrow['fld_customer_name']?></option>
+					<option value="<?php echo $custrow['fld_customer_id']; ?>" selected><?php echo $custrow['fld_customer_name'];?></option>
 				<?php } else { ?>
-					<option value="<?php echo $custrow['fld_customer_id']; ?>"><?php echo $custrow['fld_customer_name']?></option>
+					<option value="<?php echo $custrow['fld_customer_id']; ?>"><?php echo $custrow['fld_customer_name'];?></option>
 				<?php } ?>
 			<?php
 			} // while
@@ -91,7 +91,7 @@
 				$stmt->execute();
 				$result = $stmt->fetchAll();
 			}
-			catch(PDOException $e){
+			catch(PDOException $e){ 
 						echo "Error: " . $e->getMessage();
 			}
 			foreach($result as $orderrow) {
@@ -99,8 +99,8 @@
 			<tr>
 				<td><?php echo $orderrow['fld_order_id']; ?></td>
 				<td><?php echo $orderrow['fld_order_date']; ?></td>
-				<td><?php echo $orderrow['fld_staff_name']?></td>
-				<td><?php echo $orderrow['fld_customer_name']?></td>
+				<td><?php echo $orderrow['fld_staff_name'];?></td>
+				<td><?php echo $orderrow['fld_customer_name'];?></td>
 				<td>
 					<a href="orders_details.php?oid=<?php echo $orderrow['fld_order_id']; ?>">Details</a>
 					<a href="orders.php?edit=<?php echo $orderrow['fld_order_id']; ?>">Edit</a>
@@ -109,8 +109,21 @@
 			</tr>
 			<?php
 			}
-			$conn = null;
-			?>
+			if (!isset($_GET['edit'])&&$stmt->rowCount()>0){
+        		$num = ltrim($orderrow['fld_order_id'], 'O')+1;
+        		$num = 'O'.str_pad($num,5,"0",STR_PAD_LEFT);
+      		}
+      		else{
+      			$num = 'O'.str_pad(1,5,"0",STR_PAD_LEFT);
+      		}
+      	$conn = null;
+      	?>
+      	<script type="text/javascript">
+        	if("<?php echo $num ?>" !== null && "<?php echo $num ?>" !== ""){
+          	var oid = document.getElementById("oid");
+          	oid.value = "<?php echo $num ?>";
+        	}
+      	</script>
 		</table>
 	</center>
 </body>

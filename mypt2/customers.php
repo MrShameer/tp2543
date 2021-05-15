@@ -73,13 +73,15 @@
         $num = ltrim($readrow['fld_customer_id'], 'C')+1;
         $num = 'C'.str_pad($num,3,"0",STR_PAD_LEFT);
       }
+      else{
+        $num = 'C'.str_pad(1,3,"0",STR_PAD_LEFT);
+      }
       $conn = null;
       ?>
       <script type="text/javascript">
         if("<?php echo $num ?>" !== null && "<?php echo $num ?>" !== ""){
           var cid = document.getElementById("cid");
           cid.value = "<?php echo $num ?>";
-          //cid.readOnly = true;
         }
       </script>
     </table>

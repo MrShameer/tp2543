@@ -111,14 +111,15 @@ include_once 'products_crud.php';
 				$num = ltrim($readrow['fld_product_id'], 'P')+1;
 				$num = 'P'.str_pad($num,3,"0",STR_PAD_LEFT);
 			}
-
+			else{
+      			$num = 'P'.str_pad(1,3,"0",STR_PAD_LEFT);
+      		}
 			$conn = null;
 			?>
 			<script type="text/javascript">
 				if("<?php echo $num ?>" !== null && "<?php echo $num ?>" !== ""){
 					var pid = document.getElementById("pid");
 					pid.value = "<?php echo $num ?>";
-					//pid.readOnly = true;
 				}
 			</script>
 		</table>
