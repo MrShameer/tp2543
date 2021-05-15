@@ -46,14 +46,14 @@
       }
       foreach($result as $productrow) {
       ?>
-        <option value="<?php echo $productrow['fld_product_id']; ?>"><?php echo $productrow['fld_product_brand']." ".$productrow['fld_product_name']; ?></option>
+        <option value="<?php echo $productrow['fld_product_id']; ?>"><?php echo $productrow['fld_product_brand']." | ".$productrow['fld_product_name']; ?></option>
       <?php
       }
       $conn = null;
       ?>
       </select>
       Quantity
-      <input name="quantity" type="text">
+      <input type="number" name="quantity" min="1" max="900" step="1" value="1"> <br>
       <input name="oid" type="hidden" value="<?php echo $readrow['fld_order_id'] ?>">
       <button type="submit" name="addproduct">Add Product</button>
       <button type="reset">Clear</button>
