@@ -5,6 +5,7 @@
 <html>
 <head>
 	<title>Hypers Ordering System : Staffs</title>
+	<link rel="shortcut icon" type="image/x-icon" href="products/hypers logo.ico"/>
 </head>
 <body>
 	<object name="menu" type="text/html" data="menu.html" width="100%" height="50px"></object>

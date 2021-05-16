@@ -32,7 +32,7 @@ include_once 'database.php';
 		Description: <?php echo $readrow['fld_product_description'] ?> <br>
 		Quantity: <?php echo $readrow['fld_product_quantity'] ?> <br>
 		Material: <?php echo $readrow['fld_product_material'] ?> <br>
-		<img src="products/<?php echo $readrow['fld_product_image'] ?>" width="50%" height="50%">
+		<img src="products/<?php echo $readrow['fld_product_id'];?>.jpg" width="50%" height="50%">
 	</center>
 </body>
 </html>

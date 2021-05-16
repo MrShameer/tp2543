@@ -7,6 +7,7 @@ include_once 'products_crud.php';
 <head>
 	<title>Hypers Ordering System : Products</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="shortcut icon" type="image/x-icon" href="products/hypers logo.ico"/>
 </head>
 <body>
 	<object name="menu" type="text/html" data="menu.html" width="100%" height="50px"></object>
@@ -97,7 +98,7 @@ include_once 'products_crud.php';
 					<td><?php echo $readrow['fld_product_description']; ?></td>
 					<td><?php echo $readrow['fld_product_quantity']; ?></td>
 					<td><?php echo $readrow['fld_product_material']; ?></td>
-					<td><?php echo '<img width=70%; src="products/'. $readrow['fld_product_image'].'"><br />'; ?></td>
+					<td><?php echo '<img width=70%; src="products/'. $readrow['fld_product_id'].'.jpg"><br />'; ?></td>
 					<td>
 						<a href="products_details.php?pid=<?php echo $readrow['fld_product_id']; ?>">Details</a>
 						<a href="products.php?edit=<?php echo $readrow['fld_product_id'];?>">Edit</a>

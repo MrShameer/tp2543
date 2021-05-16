@@ -191,19 +191,26 @@ Name: Mohamed Shameer Ali
 
 			function foo()
 			{
-			    var randX = Math.floor(Math.random() * (window.innerWidth - 100));
-			    var randY = Math.floor(Math.random() * (window.innerHeight - 100));
-			    caller.stop().animate({"left": randX + "px", "top": randY + "px"});
+				var randX = Math.floor(Math.random() * (window.innerWidth - 100));
+				var randY = Math.floor(Math.random() * (window.innerHeight - 100));
+				caller.stop().animate({"left": randX + "px", "top": randY + "px"});
 
 			}
 
 			$(document).ready(function() {
-			    
-			    caller.on('mouseenter', foo);
-			    caller.on('click', function(){
-			        alert('Sorry no light mode. But you can download the whole content/code of this website.');
-			    });
-			    
+				
+				caller.on('mouseenter', foo);
+				caller.on('click', function(){
+					if(renderer.getClearColor().getHex()==855309){
+						renderer.setClearColor("#f0f0f0");
+					}
+					else{
+						renderer.setClearColor("#0d0d0d");
+					}
+					//alert(renderer.getClearColor().getHex());
+					alert('You can download the whole content/code of this website.');
+				});
+				
 			});
 		</script>
 	
@@ -301,8 +308,6 @@ Name: Mohamed Shameer Ali
 					mesh.scale.z -= 0.0003;
 					camera.updateProjectionMatrix();
 				}
-
-				
 				//mesh.rotation.y += 0.003;
 					//console.log(model.rotation.y);
 				//controls.update();
@@ -313,7 +318,6 @@ Name: Mohamed Shameer Ali
 				renderer.render(scene, camera);
 			}
 			render();
-
 			//tamat
 			window.setTimeout(function() {
 				//main smpai bile2

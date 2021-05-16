@@ -5,6 +5,7 @@
 <html>
 <head>
   <title>Hypers Ordering System : Orders</title>
+  <link rel="shortcut icon" type="image/x-icon" href="products/hypers logo.ico"/>
 </head>
 <body>
   <center>
