@@ -32,7 +32,12 @@ include_once 'database.php';
 		Description: <?php echo $readrow['fld_product_description'] ?> <br>
 		Quantity: <?php echo $readrow['fld_product_quantity'] ?> <br>
 		Material: <?php echo $readrow['fld_product_material'] ?> <br>
-		<img src="products/<?php echo $readrow['fld_product_id'];?>.jpg" width="50%" height="50%">
+		<?php if(file_exists('products/'. $readrow['fld_product_id'].'.jpg')){
+			echo '<td><img width=70%; src="products/'.$readrow['fld_product_id'].'.jpg"'.'><br/></td>';
+		}
+		else{
+			echo '<td><img width=70%; src="products/nophoto.jpg"'.'><br/></td>';
+		}?>
 	</center>
 </body>
 </html>

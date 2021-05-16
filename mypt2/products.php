@@ -98,7 +98,12 @@ include_once 'products_crud.php';
 					<td><?php echo $readrow['fld_product_description']; ?></td>
 					<td><?php echo $readrow['fld_product_quantity']; ?></td>
 					<td><?php echo $readrow['fld_product_material']; ?></td>
-					<td><?php echo '<img width=70%; src="products/'. $readrow['fld_product_id'].'.jpg"><br />'; ?></td>
+					<?php if(file_exists('products/'. $readrow['fld_product_id'].'.jpg')){
+						echo '<td><img width=70%; src="products/'.$readrow['fld_product_id'].'.jpg"'.'><br/></td>';
+					}
+					else{
+						echo '<td><img width=70%; src="products/nophoto.jpg"'.'><br/></td>';
+					}?>
 					<td>
 						<a href="products_details.php?pid=<?php echo $readrow['fld_product_id']; ?>">Details</a>
 						<a href="products.php?edit=<?php echo $readrow['fld_product_id'];?>">Edit</a>
