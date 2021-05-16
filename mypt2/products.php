@@ -19,7 +19,7 @@ include_once 'products_crud.php';
 			Name
 			<input name="name" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_name']; ?>" required> <br>
 			Price
-			<input name="price" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_price']; ?>" required> <br>
+			<input name="price" type="number" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_price']; ?>" required> <br>
 			Type
 			<select name="type">
 				<option value="Action Figure" <?php if(isset($_GET['edit'])) if($editrow['fld_product_type']=="Action Figure") echo "selected"; ?>>Action Figure</option>

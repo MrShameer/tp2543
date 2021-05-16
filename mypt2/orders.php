@@ -87,7 +87,7 @@
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				$sql = "SELECT * FROM tbl_orders_a173586, tbl_staffs_a173586, tbl_customers_a173586 WHERE ";
 				$sql = $sql."tbl_orders_a173586.fld_staff_id = tbl_staffs_a173586.fld_staff_id and ";
-				$sql = $sql."tbl_orders_a173586.fld_customer_id = tbl_customers_a173586.fld_customer_id";
+				$sql = $sql."tbl_orders_a173586.fld_customer_id = tbl_customers_a173586.fld_customer_id ORDER BY fld_order_id ASC";
 				$stmt = $conn->prepare($sql);
 				$stmt->execute();
 				$result = $stmt->fetchAll();
