@@ -14,9 +14,9 @@
 			Staff ID
 			<input name="sid" type="text" id="sid" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_id']; ?>" readonly> <br>
 			Name
-			<input name="name" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_name']; ?>"> <br>
+			<input name="name" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_name']; ?>"required> <br>
 			Phone Number
-			<input name="phoneno" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_phoneno']; ?>"> <br>
+			<input name="phoneno" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_phoneno']; ?>"required> <br>
 
 			<?php if (isset($_GET['edit'])) { ?>
 			<input type="hidden" name="oldsid" value="<?php echo $editrow['fld_staff_num']; ?>">

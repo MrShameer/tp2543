@@ -12,7 +12,6 @@ include_once 'products_crud.php';
 <body>
 	<object name="menu" type="text/html" data="menu.html" width="100%" height="50px"></object>
 	<center>
-
 		<form action="products.php" method="post">
 			Product ID
 			<input name="pid" type="text" id="pid" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_id'];?>" readonly> <br>
@@ -42,7 +41,7 @@ include_once 'products_crud.php';
 			Description
 			<input name="description" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_description']; ?>" required> <br>
 			Quantity
-			<input type="number" name="quantity" min="1" max="900" step="1" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_quantity']; ?>"> <br>
+			<input type="number" name="quantity" min="1" max="900" step="1" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_quantity']; ?>" required> <br>
 			Material
 			<select name="material">
 				<option value="Plastic">Plastic</option>

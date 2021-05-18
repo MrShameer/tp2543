@@ -13,7 +13,7 @@ if (isset($_POST['create'])) {
     $stmt = $conn->prepare("INSERT INTO tbl_customers_a173586(fld_customer_id, fld_customer_name, fld_customer_phone, fld_customer_email, fld_customer_address, fld_customer_age) VALUES(:cid, :name, :phone, :email, :address, :age)");
    
     $stmt->bindParam(':cid', $cid, PDO::PARAM_STR);
-    $stmt->bindParam(':name', $fname, PDO::PARAM_STR);
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $stmt->bindParam(':address', $address, PDO::PARAM_STR);

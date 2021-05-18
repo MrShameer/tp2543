@@ -12,17 +12,17 @@
 	<center>
 		<form action="customers.php" method="post">
 			Customer ID
-			<input name="cid" type="text" id="cid" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_id']; ?>" readonly> <br>
+			<input name="cid" type="text" id="cid" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_id']; ?>" readonly required> <br>
 			Name
-			<input name="name" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_name']; ?>"> <br>
+			<input name="name" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_name']; ?>" required> <br>
 			Phone Number
-			<input name="phone" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_phone']; ?>"> <br>
+			<input name="phone" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_phone']; ?>" required> <br>
 			Email
-			<input name="email" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_email']; ?>"> <br>
+			<input name="email" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_email']; ?>" required> <br>
 			Address
-			<input name="address" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_address']; ?>"> <br>
+			<input name="address" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_address']; ?>" required> <br>
 			Age
-			<input type="number" name="age" min="1" max="900" step="1" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_age']; ?>"> <br>
+			<input type="number" name="age" min="1" max="900" step="1" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_age']; ?>" required> <br>
 			<?php if (isset($_GET['edit'])) { ?>
 			<input type="hidden" name="oldcid" value="<?php echo $editrow['fld_customer_id']; ?>">
 			<button type="submit" name="update">Update</button>
