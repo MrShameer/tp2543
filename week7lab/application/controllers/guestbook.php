@@ -24,7 +24,7 @@ class GuestBook extends CI_Controller {
       if ($data['result']) {
 			$this->load->view('list', $data);
 		} else {
-			redirect(base_url() . "/guestbook/");
+			redirect(base_url() . "guestbook");
 		}
     }
 
@@ -106,8 +106,6 @@ class GuestBook extends CI_Controller {
             } else {
                 redirect(base_url()."guestbook/view");
             }
-
-            $this->load->view('edit', $data);   
         }
     }
 
