@@ -102,7 +102,17 @@ if (isset($_GET['edit'])) {
       echo "Error: " . $e->getMessage();
   }
 }
- 
+
+  $num = $conn->query("SELECT MAX(fld_staff_id) AS pid FROM tbl_staffs_a173586")->fetch()['pid'];
+
+  if ($num){
+    $num = ltrim($num, 'S')+1;
+    $num = 'S'.str_pad($num,3,"0",STR_PAD_LEFT);
+  }
+  else{
+    $num = 'S'.str_pad(1,3,"0",STR_PAD_LEFT);
+  }
+
   $conn = null;
  
 ?>

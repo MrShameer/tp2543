@@ -12,7 +12,7 @@
 	<center>
 		<form action="orders.php" method="post">
 			Order ID
-			<input name="oid" type="text" id="oid" readonly value="<?php if(isset($_GET['edit'])) echo $editrow['fld_order_id']; ?>"> <br>
+			<input name="oid" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_order_id']; else echo $num;?>" readonly required> <br>
 			Order Date
 			<input name="orderdate" type="text" readonly value="<?php if(isset($_GET['edit'])) echo $editrow['fld_order_date']; ?>"> <br>
 			Staff
@@ -110,21 +110,9 @@
 			</tr>
 			<?php
 			}
-			if (!isset($_GET['edit'])&&$stmt->rowCount()>0){
-				$num = ltrim($orderrow['fld_order_id'], 'O')+1;
-				$num = 'O'.str_pad($num,5,"0",STR_PAD_LEFT);
-			}
-			elseif(!isset($_GET['edit'])){
-				$num = 'O'.str_pad(1,5,"0",STR_PAD_LEFT);
-			}
+			
 		$conn = null;
 		?>
-		<script type="text/javascript">
-			if("<?php echo $num ?>" !== null && "<?php echo $num ?>" !== ""){
-			var oid = document.getElementById("oid");
-			oid.value = "<?php echo $num ?>";
-			}
-		</script>
 		</table>
 	</center>
 </body>

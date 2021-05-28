@@ -126,6 +126,16 @@ if (isset($_GET['edit'])) {
       echo "Error: " . $e->getMessage();
   }
 }
- 
+
+  $num = $conn->query("SELECT MAX(fld_product_id) AS pid FROM tbl_products_a173586")->fetch()['pid'];
+
+  if ($num){
+    $num = ltrim($num, 'P')+1;
+    $num = 'P'.str_pad($num,3,"0",STR_PAD_LEFT);
+  }
+  else{
+    $num = 'P'.str_pad(1,3,"0",STR_PAD_LEFT);
+  }
+  
   $conn = null;
 ?>

@@ -12,7 +12,7 @@
 	<center>
 		<form action="staffs.php" method="post">
 			Staff ID
-			<input name="sid" type="text" id="sid" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_id']; ?>" readonly> <br>
+			<input name="sid" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_id']; else echo $num; ?>" readonly required> <br>
 			Name
 			<input name="name" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_name']; ?>"required> <br>
 			Phone Number
@@ -59,21 +59,8 @@
 			</tr>
 			<?php
 			}
-			if (!isset($_GET['edit'])&&$stmt->rowCount()>0){
-				$num = ltrim($readrow['fld_staff_id'], 'S')+1;
-				$num = 'S'.str_pad($num,3,"0",STR_PAD_LEFT);
-			}
-			elseif(!isset($_GET['edit'])){
-				$num = 'S'.str_pad(1,3,"0",STR_PAD_LEFT);
-			}
 			$conn = null;
 			?>
-			<script type="text/javascript">
-				if("<?php echo $num ?>" !== null && "<?php echo $num ?>" !== ""){
-					var sid = document.getElementById("sid");
-					sid.value = "<?php echo $num ?>";
-				}
-			</script>
 		</table>
 	</center>
 </body>
