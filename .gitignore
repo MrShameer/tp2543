@@ -4,4 +4,6 @@ rr
 *db.php
 sftp-config.json
 *.png
+*.jpg
+*.jpeg
 mypt3
