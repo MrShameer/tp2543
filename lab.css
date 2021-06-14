@@ -1,6 +1,10 @@
+
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
 *{
-	margin: 0;
-	padding: 0;
+
 	box-sizing: border-box;
 	font-family: Concert One, Consolas, Montserrat, sans-serif;
 }
@@ -9,7 +13,9 @@
 	--colr: linear-gradient(45deg, #ffbc80, #ff0058);
 }
 
-
+html{
+	scroll-behavior: smooth;
+}
 
 body{
 	background: #111;
@@ -30,7 +36,7 @@ body{
 	flex-wrap: wrap;
 }
 
-a{
+.container a{
 	position: relative;
 	width: 320px;
 	height: 300px;
@@ -44,12 +50,12 @@ a{
 
 }
 
-a:hover{
+.container a:hover{
 	text-decoration: none;
 	transform: translate(0,-20px);
 }
 
-a:before{
+.container a:before{
 	content: '';
 	position: absolute;
 	top: 0;
@@ -59,7 +65,7 @@ a:before{
 	background: var(--colr);
 }
 
-a:after{
+.container a:after{
 	content: '';
 	position: absolute;
 	top: 0;
@@ -70,28 +76,28 @@ a:after{
 	filter: blur(30px);
 }
 
-a:nth-child(2)::before,
-a:nth-child(2)::after{
+.container a:nth-child(2)::before,
+.container a:nth-child(2)::after{
 	background: linear-gradient(315deg, #03a9f4, #ff0058);
 }
 
-a:nth-child(3)::before,
-a:nth-child(3)::after{
+.container a:nth-child(3)::before,
+.container a:nth-child(3)::after{
 	background: linear-gradient(315deg, #4dff03, #00d0ff);
 }
 
-a:nth-child(4)::before,
-a:nth-child(4)::after{
+.container a:nth-child(4)::before,
+.container a:nth-child(4)::after{
 	background: linear-gradient(315deg, #43C6AC, #191654);
 }
 
-a:nth-child(5)::before,
-a:nth-child(5)::after{
+.container a:nth-child(5)::before,
+.container a:nth-child(5)::after{
 	background: linear-gradient(315deg, #EB5757, #000000);
 }
 
-a:nth-child(6)::before,
-a:nth-child(6)::after{
+.container a:nth-child(6)::before,
+.container a:nth-child(6)::after{
 	background: linear-gradient(315deg, #a80077, #66ff00);
 }
 /*

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lab 11 - JavaScript</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="../lab.css">
+	<style type="text/css">
+		.container{
+			flex-direction: column;
+		}
+		a > span{
+			position: fixed;
+			bottom: 10px;
+			right: 10px;
+		}
+		.material-icons {
+			font-size: 54px;
+			color: white;
+		}
+	</style>
+</head>
+
+<body id="top">
+	<div class="jumbotron text-center">
+		<h1><strong>LAB 11</strong></h1>
+		<h2><strong>JavaScript</strong></h2>
+	</div>
+
+	<div class="container">
+		<script type="text/javascript">
+			function makesec(p) {
+				let sec=['<br><br><h2><b>Part '+p+'</b></h2><div class="row justify-content-center" id='+p+'></div>']
+				return sec.join('\n');
+			}
+
+			function makeblock(href,a) {
+				let block=['<a href='+href+'><span></span><div class="content"><h2>'+a+'</h2></div></a>']
+				return block.join('\n');
+			}
+
+			let arr = {1:{"ex":[1,2,4,5,8,12]},2:{"exjs":[5,8,9,11,15]}};
+			for(var i in arr){
+				$(".container").append(makesec(i));
+				for(var k in arr[i]){
+					for(var j in arr[i][k]){
+						$("#"+i).append(makeblock(k+""+arr[i][k][j]+".html","Exercise "+arr[i][k][j]));
+					}	
+				}
+			}
+		</script>
+
+		<br><br><h2><b>Extract MyCard Information</b></h2>
+		<div class="row justify-content-center">
+			<a href="form.html">
+				<span></span>
+				<div class="content">
+					<h2>MyCard Extractor</h2>
+				</div>
+			</a>
+		</div>
+	</div>
+
+	<a role="button" id="scroll">
+		<span id="ico" class="material-icons md-48">arrow_circle_down</span>
+	</a>
+
+	<script type="text/javascript">
+		$("#scroll").click(function(){
+			if($("#ico").html()==="arrow_circle_down")
+				$(document).scrollTop($(document).height());
+			else
+				$('html,body').scrollTop(0);
+		});
+
+		$(window).scroll(function() {
+			if($(window).scrollTop() + $(window).height() == $(document).height())
+				$("#ico").html("arrow_circle_up");
+			else
+				$("#ico").html("arrow_circle_down");
+		});
+	</script>
+</body>
+</html>

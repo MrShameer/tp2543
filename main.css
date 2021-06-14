@@ -3,7 +3,7 @@ html{
 	overflow-x: hidden;
 }
 body {
-	font: 20px Concert One, Montserrat, sans-serif;
+	font: 20px Concert One, sans-serif;
 	line-height: 1.8;
 	overflow: hidden;
 	color: white;
@@ -226,6 +226,14 @@ svg {
 	text-transform: uppercase; }
 
 
+a > #ico{
+			position: fixed;
+			bottom: 10px;
+			right: 10px;
+			z-index: 1000;
+			font-size: 34px;
+			color: white;
+}
 
 
 /*footer la*/
@@ -299,7 +307,7 @@ svg {
 }
 
 ion-icon {
-  pointer-events: none;
+
 }
 
 
