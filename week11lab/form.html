@@ -89,6 +89,8 @@
 					alert("Please insert your MyCard number");
 				else if(alt=='c')
 					alert("Please insert a correct MyCard number");
+				else if(alt=='d')
+					alert("Please make sure your DOB is correct");
 				else
 					alert("Sorry can't compute");
 			}
@@ -135,11 +137,11 @@
 
 				var date = new Date(`${dob[1]}/${dob[2]}/${dob[0]}`);
 				if(!(date instanceof Date && !isNaN(date.valueOf()))){
-					prt('c');
+					prt('d');//tk penting
 					return "";
 				}
 				return `${dob[2]}/${dob[1]}/${dob[0]}`;
-				
+
 			}
 
 			function setSelectedValue(selectObj, valueToSet) {
