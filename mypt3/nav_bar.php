@@ -1,5 +1,7 @@
+<link rel="shortcut icon" type="image/x-icon" href="products/hypers logo.ico"/>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="style.css" rel="stylesheet">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->

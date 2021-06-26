@@ -1,22 +1,23 @@
 <?php
 include_once 'products_crud.php';
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<title>Hypers Ordering System : Products</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link rel="shortcut icon" type="image/x-icon" href="products/hypers logo.ico"/>
+	<?php include_once 'nav_bar.php';?>
+	<style type="text/css">
+	tr .btn{
+		width: 100%;
+		margin: 5px 0;
+	}
+</style>
 </head>
 <body>
-	<?php include_once 'nav_bar.php';?>
-
+	
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
@@ -33,13 +34,13 @@ include_once 'products_crud.php';
 					<div class="form-group">
 						<label for="productname" class="col-sm-3 control-label">Name</label>
 						<div class="col-sm-9">
-							<input name="name" class="form-control" type="text" id="productname" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_name']; ?>" required> 
+							<input name="name" class="form-control" type="text" placeholder="Product Name" id="productname" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_name']; ?>" required> 
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="productprice" class="col-sm-3 control-label">Price</label>
 						<div class="col-sm-9">
-							<input name="price" class="form-control" type="text" id="productprice" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_price']; ?>" required> 
+							<input name="price" class="form-control" type="text" placeholder="Product Price" id="productprice" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_price']; ?>" required> 
 						</div>
 					</div>
 					<div class="form-group">
@@ -72,13 +73,13 @@ include_once 'products_crud.php';
 					<div class="form-group">
 						<label for="productdesc" class="col-sm-3 control-label">Description</label>
 						<div class="col-sm-9">
-							<input name="description" class="form-control" type="text" id="productdesc" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_description']; ?>" required> 
+							<input name="description" class="form-control" placeholder="Product Description" type="text" id="productdesc" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_description']; ?>" required> 
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="productq" class="col-sm-3 control-label">Quantity</label>
 						<div class="col-sm-9">
-							<input type="number" class="form-control" name="quantity" id="productq" min="1" max="900" step="1" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_quantity']; ?>" required> 
+							<input type="number" placeholder="Product Quantity" class="form-control" name="quantity" id="productq" min="1" max="900" step="1" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_quantity']; ?>" required> 
 						</div>
 					</div>
 					<div class="form-group">
@@ -115,40 +116,24 @@ include_once 'products_crud.php';
 					<div class="row">
 						<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 							<div class="page-header">
-								<h2 class="pull-left" style="margin: 0 50px 0 0;">Products List</h2>
-								<form class="form-inline my-2 my-lg-0">
+								<h2>Products List</h2>
+								<!--form class="form-inline my-2 my-lg-0">
 									<input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search">
 									<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-								</form>
-								<script type="text/javascript">
-									$(document).ready(function(){
-										$("#search").on("keyup", function() {
-											var value = $(this).val().toLowerCase();
-											$("#table tr").filter(function() {
-												$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-											});
-										});
-									});
-
-
-									/*$(document).ready(function () {
-  $('#table').DataTable();
-  $('.dataTables_length').addClass('bs-select');
-});*/
-								</script>
+								</form-->
 							</div>
 							<table class="table table-striped table-bordered text-center data-detail-filter" id="table">
 								<tr>
-									<td>Product ID</td>
-									<td>Name</td>
-									<td>Price</td>
-									<td>Type</td>
-									<td>Brand</td>
-									<td>Description</td>
-									<td>Quantity</td>
-									<td>Material</td>
-									<td>Imange</td>
-									<td></td>
+									<th>Product ID</th>
+									<th>Name</th>
+									<th>Price</th>
+									<th>Type</th>
+									<th>Brand</th>
+									<th>Description</th>
+									<th>Quantity</th>
+									<th>Material</th>
+									<th>Imange</th>
+									<th></th>
 								</tr>
 								<?php
 								$per_page = 5;

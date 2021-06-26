@@ -54,8 +54,3 @@ body{
     transform-style: preserve-3d;
     transition: .5s ease;
 }
-
-tr .btn{
-	width: 100%;
-	margin: 5px 0;
-}
