@@ -19,6 +19,7 @@ if (isset($_POST['create'])) {
     $cid = $_POST['cid'];
      
     $stmt->execute();
+    header("Location: orders.php");
     }
  
   catch(PDOException $e)

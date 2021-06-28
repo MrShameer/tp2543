@@ -21,6 +21,7 @@ if (isset($_POST['create'])) {
     $phoneno = $_POST['phoneno'];
          
     $stmt->execute();
+    header("Location: staffs.php");
     }
  
   catch(PDOException $e)

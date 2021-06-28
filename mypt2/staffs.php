@@ -19,7 +19,7 @@
 			<input name="phoneno" type="text" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_phoneno']; ?>"required> <br>
 
 			<?php if (isset($_GET['edit'])) { ?>
-			<input type="hidden" name="oldsid" value="<?php echo $editrow['fld_staff_num']; ?>">
+			<input type="hidden" name="oldsid" value="<?php echo $editrow['fld_staff_id']; ?>">
 			<button type="submit" name="update">Update</button>
 			<?php } else { ?>
 			<button type="submit" name="create">Create</button>

@@ -32,6 +32,7 @@ if (isset($_POST['addproduct'])) {
       echo "Error: " . $e->getMessage();
   }
   $_GET['oid'] = $oid;
+  header("Location: orders_details.php?oid=".$_GET['oid']);
 }
  
 //Delete

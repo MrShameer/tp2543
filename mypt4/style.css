@@ -47,11 +47,11 @@ body{
 }
 
 
-#img{
+/*#img{
     background:url(products/hypers.png) center center no-repeat;
     display: block;
     width: 100vw;
     height: 90vh;
     transform-style: preserve-3d;
     transition: .5s ease;
-}
+}*/

@@ -34,6 +34,7 @@ if (isset($_POST['create'])) {
     //$image = $_POST['image'];
      
     $stmt->execute();
+    header("Location: products.php");
     }
  
   catch(PDOException $e)

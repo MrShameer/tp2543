@@ -9,11 +9,15 @@ include_once 'products_crud.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hypers Ordering System : Products</title>
 	<?php include_once 'nav_bar.php';?>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
 	<style type="text/css">
 		tr .btn{
 			width: 100%;
 			margin: 5px 0;
 		}
+        input[type="file"] {
+            display: none;
+        }
 	</style>
 </head>
 <body>
@@ -112,6 +116,29 @@ include_once 'products_crud.php';
 							<span class="glyphicon glyphicon-erase" aria-hidden="true"></span>Clear</button>
 						</div>
 					</div>
+
+					<div class="col-md-4" style="height: 100%">
+                        <div class="thumbnail dark-1">
+                            <img src="products/<?php echo(isset($_GET['edit']) ? $editrow['fld_product_image'] : '') ?>"
+                                 onerror="this.onerror=null;this.src='products/nophoto.jpg';" id="productPhoto"
+                                 alt="Product Image" style="width: 100%;height: 225px;">
+                            <div class="caption text-center">
+                                <h3 id="productImageTitle" style="word-break: break-all;">Product Image</h3>
+                                <p>
+                                    <label class="btn btn-primary">
+                                        <input type="file" accept="image/*" name="fileToUpload" id="inputImage"
+                                               onchange="loadFile(event);"/>
+                                        <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span> Browse
+                                    </label>
+                                    <?php
+                                    if (isset($_GET['edit']) && $editrow['fld_product_image'] != '') {
+                                        echo '<a href="#" class="btn btn-danger disabled" role="button">Delete</a>';
+                                    }
+                                    ?>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
 				</form>
 			</div>
 		</div>
@@ -120,7 +147,8 @@ include_once 'products_crud.php';
 				<div class="page-header">
 					<h2>Products List</h2>
 				</div>
-				<table class="table table-striped table-bordered text-center data-detail-filter" id="table">
+				<table id="productlist" class="table-dark table-striped table-bordered hover" id="table">
+					<thead>
 					<tr>
 						<th>Product ID</th>
 						<th>Name</th>
@@ -133,17 +161,13 @@ include_once 'products_crud.php';
 						<th>Imange</th>
 						<th></th>
 					</tr>
+					</thead>
+					<tbody>
 					<?php
-					$per_page = 5;
-					if (isset($_GET["page"]))
-						$page = $_GET["page"];
-					else
-						$page = 1;
-					$start_from = ($page-1) * $per_page;
 					try {
 						$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 						$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-						$stmt = $conn->prepare("SELECT * FROM tbl_products_a173586 LIMIT $start_from, $per_page");
+						$stmt = $conn->prepare("SELECT * FROM tbl_products_a173586");
 						$stmt->execute();
 						$result = $stmt->fetchAll();
 					}
@@ -170,7 +194,6 @@ include_once 'products_crud.php';
 								echo '<td><img width=70%; data-toggle="modal" data-target="#'.$readrow['fld_product_id'].'" src="products/nophoto.jpg"'.'></td>';
 							}?>
 
-							<!--ni haa tuk kluar gmbr tu-->
 							<div id="<?php echo $readrow['fld_product_id']?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog modal-body">
 									<img src="<?php echo $img ?>" class="img-responsive">
@@ -189,49 +212,31 @@ include_once 'products_crud.php';
 					}
 					$conn = null;
 					?>
+					</tbody>
 				</table>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-				<nav>
-					<ul class="pagination">
-						<?php
-						try {
-							$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-							$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-							$stmt = $conn->prepare("SELECT * FROM tbl_products_a173586");
-							$stmt->execute();
-							$result = $stmt->fetchAll();
-							$total_records = count($result);
-						}
-						catch(PDOException $e){
-							echo "Error: " . $e->getMessage();
-						}
-						$total_pages = ceil($total_records / $per_page);
-						if ($page==1){ ?>
-							<li class="disabled"><span aria-hidden="true">«</span></li>
-						<?php
-						}else{ ?>
-							<li><a href="products.php?page=<?php echo $page-1 ?>" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-						<?php }
-						for ($i=1; $i<=$total_pages; $i++)
-							if ($i == $page)
-								echo "<li class=\"active\"><a href=\"products.php?page=$i\">$i</a></li>";
-							else
-								echo "<li><a href=\"products.php?page=$i\">$i</a></li>";
-						if ($page==$total_pages){?>
-							<li class="disabled"><span aria-hidden="true">»</span></li>
-						<?php }else{ ?>
-							<li><a href="products.php?page=<?php echo $page+1 ?>" aria-label="Previous"><span aria-hidden="true">»</span></a></li>
-						<?php } ?>
-					</ul>
-				</nav>
 			</div>
 		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+	
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script type="application/javascript">
+    var loadFile = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('productPhoto');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+        document.getElementById('productImageTitle').innerText = event.target.files[0]['name'];
+    };
+
+    $(document).ready(function () {
+        $("#productlist").DataTable({
+        "lengthMenu": [[5, 20, 50, -1], [5, 20, 50, "All"]]
+    });
+    });
+</script>
 </body>
 </html>

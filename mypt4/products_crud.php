@@ -1,13 +1,53 @@
 <?php
  
 include_once 'database.php';
+
+function uploadPhoto($file, $id)
+{
+    $target_dir = "products/";
+    $filename = basename($file["name"]);
+    $imageFileType = strtolower(pathinfo($target_dir . $filename, PATHINFO_EXTENSION));
+
+    $newfilename = "{$id}.{$imageFileType}";
+    $target_file = $target_dir . $newfilename;
+
+    /*
+     * 0 = image file is a fake image
+     * 1 = file is too large.
+     * 2 = PNG & GIF files are allowed
+     * 3 = Server error
+     * 4 = No file were uploaded
+     */
+
+    if ($file['error'] == 4)
+        return 4;
+
+    // Check if image file is a actual image or fake image
+    if (!getimagesize($file['tmp_name']))
+        return 0;
+
+    // Check file size
+    if ($file["size"] > 10000000)
+        return 1;
+
+    // Allow certain file formats
+    if ($imageFileType != "png" && $imageFileType != "gif")
+        return 2;
+
+    if (!move_uploaded_file($file["tmp_name"], $target_file))
+        return 3;
+
+    return array('status' => 200, 'name' => $newfilename, 'ext' => $imageFileType);
+}
+
  
 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
  
 //Create
 if (isset($_POST['create'])) {
- 
+ $uploadStatus = uploadPhoto($_FILES['fileToUpload'], $_POST['pid']);
+ if (isset($uploadStatus['status'])) {
   try {
  
       $stmt = $conn->prepare("INSERT INTO tbl_products_a173586(fld_product_id,fld_product_name,fld_product_price,fld_product_type,fld_product_brand,fld_product_description,fld_product_quantity,fld_product_material) VALUES(:pid, :name, :price, :type,:brand,:description,:quantity,:material)");
@@ -34,13 +74,31 @@ if (isset($_POST['create'])) {
     //$image = $_POST['image'];
      
     $stmt->execute();
-    header("Location: products.php");
     }
  
   catch(PDOException $e)
   {
       echo "Error: " . $e->getMessage();
   }
+   } else {
+        if ($uploadStatus == 0)
+            $_SESSION['error'] = "Please make sure the file uploaded is an image.";
+        elseif ($uploadStatus == 1)
+            $_SESSION['error'] = "Sorry, only file with below 10MB are allowed.";
+        elseif ($uploadStatus == 2)
+            $_SESSION['error'] = "Sorry, only PNG & GIF files are allowed.";
+        elseif ($uploadStatus == 3)
+            $_SESSION['error'] = "Sorry, there was an error uploading your file.";
+        elseif ($uploadStatus == 4)
+            $_SESSION['error'] = 'Please upload an image.';
+        elseif ($uploadStatus == 5)
+            $_SESSION['error'] = 'File already exists. Please rename your file before upload.';
+        else
+            $_SESSION['error'] = "An unknown error has been occurred.";
+    }
+
+    header("LOCATION: {$_SERVER['REQUEST_URI']}");
+    exit();
 }
  
 //Update

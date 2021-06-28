@@ -28,6 +28,7 @@ if (isset($_POST['create'])) {
     $age = $_POST['age'];
        
     $stmt->execute();
+    header("Location: customers.php");
     }
  
   catch(PDOException $e)
@@ -45,12 +46,12 @@ if (isset($_POST['update'])) {
       WHERE fld_customer_id = :oldcid");
    
     $stmt->bindParam(':cid', $cid, PDO::PARAM_STR);
-    $stmt->bindParam(':fname', $fname, PDO::PARAM_STR);
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $stmt->bindParam(':address', $address, PDO::PARAM_STR);
     $stmt->bindParam(':age', $age, PDO::PARAM_STR);
-    $stmt->bindParam(':oldcid', $oldcid, PDO::PARAM_STR);
+    $stmt->bindParam(':oldcid', $oldcid, PDO::PARAM_INT);
        
     $cid = $_POST['cid'];
     $name = $_POST['name'];
