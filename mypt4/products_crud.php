@@ -1,7 +1,7 @@
 <?php
  
 include_once 'database.php';
-
+$extention = ["jpg", "gif", "png"];
 function uploadPhoto($file, $id)
 {
     $target_dir = "products/";
@@ -31,7 +31,7 @@ function uploadPhoto($file, $id)
         return 1;
 
     // Allow certain file formats
-    if ($imageFileType != "png" && $imageFileType != "gif")
+    if (in_array($imageFileType, $extention))
         return 2;
 
     if (!move_uploaded_file($file["tmp_name"], $target_file))
@@ -78,7 +78,7 @@ if (isset($_POST['create'])) {
  
   catch(PDOException $e)
   {
-      echo "Error: " . $e->getMessage();
+      $_SESSION['error']=$e->getMessage();
   }
    } else {
         if ($uploadStatus == 0)

@@ -22,12 +22,19 @@ include_once 'products_crud.php';
 </head>
 <body>
 	<div class="container-fluid">
+
 		<div class="row">
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 				<div class="page-header">
 					<h2>Create New Product</h2>
 				</div>
-				<form action="products.php" method="post" class="form-horizontal">
+				  <?php
+                    if (isset($_SESSION['error'])) {
+                        echo "<p class='text-danger text-center'>{$_SESSION['error']}</p>";
+                        unset($_SESSION['error']);
+                    }
+                    ?>
+				<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" class="form-horizontal" enctype="multipart/form-data" >
 					<div class="form-group">
 						<label for="pid" class="col-sm-3 control-label">ID</label>
 						<div class="col-sm-9">
