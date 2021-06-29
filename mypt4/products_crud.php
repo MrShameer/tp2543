@@ -1,16 +1,14 @@
 <?php
  
 include_once 'database.php';
-$extention = ["jpg", "gif", "png"];
+$extention = ['jpg', 'gif', 'png'];
 function uploadPhoto($file, $id)
 {
     $target_dir = "products/";
-    $filename = basename($file["name"]);
-    $imageFileType = strtolower(pathinfo($target_dir . $filename, PATHINFO_EXTENSION));
-
+    $target_file = $target_dir . basename($file["name"]);
+   // $filename = basename($file["name"]);
+    $imageFileType = strtolower(pathinfo($target_dir, PATHINFO_EXTENSION));
     $newfilename = "{$id}.{$imageFileType}";
-    $target_file = $target_dir . $newfilename;
-
     /*
      * 0 = image file is a fake image
      * 1 = file is too large.
@@ -31,10 +29,10 @@ function uploadPhoto($file, $id)
         return 1;
 
     // Allow certain file formats
-    if (in_array($imageFileType, $extention))
+    if (!in_array($imageFileType, $extention))
         return 2;
 
-    if (!move_uploaded_file($file["tmp_name"], $target_file))
+    if (!move_uploaded_file($file["tmp_name"], $target_dir . $newfilename))
         return 3;
 
     return array('status' => 200, 'name' => $newfilename, 'ext' => $imageFileType);
@@ -50,7 +48,7 @@ if (isset($_POST['create'])) {
  if (isset($uploadStatus['status'])) {
   try {
  
-      $stmt = $conn->prepare("INSERT INTO tbl_products_a173586(fld_product_id,fld_product_name,fld_product_price,fld_product_type,fld_product_brand,fld_product_description,fld_product_quantity,fld_product_material) VALUES(:pid, :name, :price, :type,:brand,:description,:quantity,:material)");
+      $stmt = $conn->prepare("INSERT INTO tbl_products_a173586(fld_product_id,fld_product_name,fld_product_price,fld_product_type,fld_product_brand,fld_product_description,fld_product_quantity,fld_product_material, fld_product_image VALUES(:pid, :name, :price, :type, :brand, :description, :quantity, :material, :image)");
      
 
       $stmt->bindParam(':pid', $pid, PDO::PARAM_STR);
@@ -59,9 +57,9 @@ if (isset($_POST['create'])) {
       $stmt->bindParam(':type', $type, PDO::PARAM_STR);
       $stmt->bindParam(':brand', $brand, PDO::PARAM_STR);
       $stmt->bindParam(':description', $description, PDO::PARAM_STR);
-      $stmt->bindParam(':quantity', $quantity, PDO::PARAM_STR);
-      $stmt->bindParam(':material', $material, PDO::PARAM_INT);
-     // $stmt->bindParam(':image', $image, PDO::PARAM_INT);
+      $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+      $stmt->bindParam(':material', $material, PDO::PARAM_STR);
+      $stmt->bindParam(':image', $uploadStatus['name']);
        
     $pid = $_POST['pid'];
     $name = $_POST['name'];
@@ -72,8 +70,9 @@ if (isset($_POST['create'])) {
     $quantity = $_POST['quantity'];
     $material = $_POST['material'];
     //$image = $_POST['image'];
-     
+    
     $stmt->execute();
+    
     }
  
   catch(PDOException $e)
@@ -106,7 +105,7 @@ if (isset($_POST['update'])) {
  
   try {
  
-      $stmt = $conn->prepare("UPDATE tbl_products_a173586 SET fld_product_id = :pid,fld_product_name = :name,fld_product_price = :price,fld_product_type = :type,fld_product_brand = :brand,fld_product_description = :description,fld_product_quantity = :quantity,fld_product_material = :material
+      $stmt = $conn->prepare("UPDATE tbl_products_a173586 SET fld_product_id = :pid,fld_product_name = :name,fld_product_price = :price,fld_product_type = :type,fld_product_brand = :brand,fld_product_description = :description,fld_product_quantity = :quantity,fld_product_material = :material,fld_product_image = :image
         WHERE fld_product_id = :oldpid");
      
       $stmt->bindParam(':pid', $pid, PDO::PARAM_STR);
@@ -117,7 +116,7 @@ if (isset($_POST['update'])) {
       $stmt->bindParam(':description', $description, PDO::PARAM_STR);
       $stmt->bindParam(':quantity', $quantity, PDO::PARAM_STR);
       $stmt->bindParam(':material', $material, PDO::PARAM_INT);
-     // $stmt->bindParam(':image', $image, PDO::PARAM_INT);
+      $stmt->bindParam(':image', $newfilename, PDO::PARAM_INT);
       $stmt->bindParam(':oldpid', $oldpid, PDO::PARAM_STR);
        
     $pid = $_POST['pid'];
@@ -132,14 +131,28 @@ if (isset($_POST['update'])) {
     $oldpid = $_POST['oldpid'];
      
     $stmt->execute();
- 
-    header("Location: products.php");
+     if (isset($uploadStatus['status'])) {
+
+    $uploadStatus = uploadPhoto($_FILES['fileToUpload'], $_POST['pid']);
+    } elseif ($flag != 4) {
+            if ($flag == 0)
+                $_SESSION['error'] = "Please make sure the file uploaded is an image.";
+            elseif ($flag == 1)
+                $_SESSION['error'] = "Sorry, only file with below 10MB are allowed.";
+            elseif ($flag == 2)
+                $_SESSION['error'] = "Sorry, only PNG & GIF files are allowed.";
+            elseif ($flag == 3)
+                $_SESSION['error'] = "Sorry, there was an error uploading your file.";
+            else
+                $_SESSION['error'] = "An unknown error has been occurred.";
+        }
     }
  
   catch(PDOException $e)
   {
       echo "Error: " . $e->getMessage();
   }
+  header("Location: products.php");
 }
  
 //Delete
