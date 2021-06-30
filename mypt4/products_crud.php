@@ -10,15 +10,12 @@ function uploadPhoto($file, $id)
 
 	if ($file['error'] == 4)
 		return 4;
-
 		// Check if image file is a actual image or fake image
 	if (!getimagesize($file['tmp_name']))
 		return 0;
-
 		// Check file size
 	if ($file["size"] > 10000000)
 		return 1;
-
 		// Allow certain file formats
 	if (!in_array($imageFileType, $extention))
 		return 2;
@@ -60,12 +57,9 @@ if (isset($_POST['create'])) {
 			$quantity = $_POST['quantity'];
 			$material = $_POST['material'];
 		//$image = $_POST['image'];
-
 			$stmt->execute();
 		}
-
-		catch(PDOException $e)
-		{
+		catch(PDOException $e){
 			$_SESSION['error']=$e->getMessage();
 		}
 	} else {
@@ -91,7 +85,6 @@ if (isset($_POST['create'])) {
 //Update
 if (isset($_POST['update'])) {
 	try {
-
 		$stmt = $conn->prepare("UPDATE tbl_products_a173586 SET fld_product_id = :pid,fld_product_name = :name,fld_product_price = :price,fld_product_type = :type,fld_product_brand = :brand,fld_product_description = :description,fld_product_quantity = :quantity,fld_product_material = :material WHERE fld_product_id = :oldpid");
 		
 		$stmt->bindParam(':pid', $pid, PDO::PARAM_STR);
@@ -119,15 +112,15 @@ if (isset($_POST['update'])) {
 		$stmt->execute();
 
 		$flag  = uploadPhoto($_FILES['fileToUpload'], $_POST['pid']);
-		//kt product.php line 138
-		if(pathinfo(basename($_POST['filename']), PATHINFO_EXTENSION)!=$flag['ext'])
-			unlink("products/{$_POST['filename']}");
-			
+
 		if (isset($flag['status'])){
 			$stmt = $conn->prepare("UPDATE tbl_products_a173586 SET fld_product_image = :image WHERE fld_product_id = :pid LIMIT 1");
 			$stmt->bindParam(':image', $flag['name']);
 			$stmt->bindParam(':pid', $pid);
 			$stmt->execute();
+			//kt product.php line 138
+			if(pathinfo(basename($_POST['filename']), PATHINFO_EXTENSION)!=$flag['ext'])
+				unlink("products/{$_POST['filename']}");
 		} elseif ($flag != 4) {
 			if ($flag == 0)
 				$_SESSION['error'] = "Please make sure the file uploaded is an image.";
@@ -151,7 +144,6 @@ if (isset($_POST['update'])) {
 		header("LOCATION: {$_SERVER['REQUEST_URI']}");
 	else
 		header("Location: products.php");
-
 	exit();
 }
 
@@ -178,28 +170,19 @@ if (isset($_GET['delete'])) {
 
 //Edit
 if (isset($_GET['edit'])) {
-
 	try {
-
 		$stmt = $conn->prepare("SELECT * FROM tbl_products_a173586 WHERE fld_product_id = :pid");
-		
 		$stmt->bindParam(':pid', $pid, PDO::PARAM_STR);
-		
 		$pid = $_GET['edit'];
-		
 		$stmt->execute();
-		
 		$editrow = $stmt->fetch(PDO::FETCH_ASSOC);
 	}
-	
-	catch(PDOException $e)
-	{
+	catch(PDOException $e){
 		echo "Error: " . $e->getMessage();
 	}
 }
 
 $num = $conn->query("SELECT MAX(fld_product_id) AS pid FROM tbl_products_a173586")->fetch()['pid'];
-
 if ($num){
 	$num = ltrim($num, 'P')+1;
 	$num = 'P'.str_pad($num,3,"0",STR_PAD_LEFT);
@@ -207,6 +190,5 @@ if ($num){
 else{
 	$num = 'P'.str_pad(1,3,"0",STR_PAD_LEFT);
 }
-
 $conn = null;
 ?>
