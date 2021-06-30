@@ -34,8 +34,8 @@ include_once 'database.php';
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 col-sm-5 col-sm-offset-1 col-md-4 col-md-offset-2 well well-sm text-center">
-				<?php if(file_exists('products/'. $readrow['fld_product_id'].'.jpg')){
-					echo '<img style="width:100%" src="products/'.$readrow['fld_product_id'].'.jpg"'.' class="img-responsive">';
+				<?php if(file_exists('products/'. $readrow['fld_product_image'])){
+					echo '<img style="width:100%" src="products/'.$readrow['fld_product_image'].'" class="img-responsive">';
 				}
 				else{
 					echo '<img src="products/nophoto.jpg"'.' class="img-responsive">';

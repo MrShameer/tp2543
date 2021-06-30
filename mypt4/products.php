@@ -15,9 +15,9 @@ include_once 'products_crud.php';
 			width: 100%;
 			margin: 5px 0;
 		}
-        input[type="file"] {
-            display: none;
-        }
+		input[type="file"] {
+			display: none;
+		}
 	</style>
 </head>
 <body>
@@ -29,11 +29,11 @@ include_once 'products_crud.php';
 					<h2>Create New Product</h2>
 				</div>
 				  <?php
-                    if (isset($_SESSION['error'])) {
-                        echo "<p class='text-danger text-center'>{$_SESSION['error']}</p>";
-                        unset($_SESSION['error']);
-                    }
-                    ?>
+					if (isset($_SESSION['error'])) {
+						echo "<p class='text-danger text-center'>{$_SESSION['error']}</p>";
+						unset($_SESSION['error']);
+					}
+					?>
 				<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" class="form-horizontal" enctype="multipart/form-data" >
 					<div class="form-group">
 						<label for="pid" class="col-sm-3 control-label">ID</label>
@@ -125,27 +125,28 @@ include_once 'products_crud.php';
 					</div>
 
 					<div class="col-md-4" style="height: 100%">
-                        <div class="thumbnail dark-1">
-                            <img src="products/<?php echo(isset($_GET['edit']) ? $editrow['fld_product_image'] : '') ?>"
-                                 onerror="this.onerror=null;this.src='products/nophoto.jpg';" id="productPhoto"
-                                 alt="Product Image" style="width: 100%;height: 225px;">
-                            <div class="caption text-center">
-                                <h3 id="productImageTitle" style="word-break: break-all;">Product Image</h3>
-                                <p>
-                                    <label class="btn btn-primary">
-                                        <input type="file" accept="image/*" name="fileToUpload" id="inputImage"
-                                               onchange="loadFile(event);"/>
-                                        <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span> Browse
-                                    </label>
-                                    <?php
-                                    if (isset($_GET['edit']) && $editrow['fld_product_image'] != '') {
-                                        echo '<a href="#" class="btn btn-danger disabled" role="button">Delete</a>';
-                                    }
-                                    ?>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+						<div class="thumbnail dark-1">
+							<img src="products/<?php echo(isset($_GET['edit']) ? $editrow['fld_product_image'] : '') ?>"
+								 onerror="this.onerror=null;this.src='products/nophoto.jpg';" id="productPhoto"
+								 alt="Product Image" style="width: 100%;height: 225px;">
+							<div class="caption text-center">
+								<h3 id="productImageTitle" style="word-break: break-all;">Product Image</h3>
+								<p>
+									<label class="btn btn-primary">
+										<input type="file" accept="image/*" name="fileToUpload" id="inputImage"
+											   onchange="loadFile(event);"/>
+										<input type="hidden" name="filename" value="<?php echo $editrow['fld_product_image']; ?>">
+										<span class="glyphicon glyphicon-cloud" aria-hidden="true"></span> Browse
+									</label>
+									<?php
+									if (isset($_GET['edit']) && $editrow['fld_product_image'] != '') {
+										echo '<a href="#" class="btn btn-danger disabled" role="button">Delete</a>';
+									}
+									?>
+								</p>
+							</div>
+						</div>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -192,9 +193,9 @@ include_once 'products_crud.php';
 							<td><?php echo $readrow['fld_product_description']; ?></td>
 							<td><?php echo $readrow['fld_product_quantity']; ?></td>
 							<td><?php echo $readrow['fld_product_material']; ?></td>
-							<?php if(file_exists('products/'. $readrow['fld_product_id'].'.jpg')){
-								$img = 'products/'.$readrow['fld_product_id'].'.jpg';
-								echo '<td><img data-toggle="modal" data-target="#'.$readrow['fld_product_id'].'" width=70%; src="products/'.$readrow['fld_product_id'].'.jpg"'.'></td>';
+							<?php if(file_exists('products/'. $readrow['fld_product_image'])){
+								$img = 'products/'.$readrow['fld_product_image'];
+								echo '<td><img data-toggle="modal" data-target="#'.$readrow['fld_product_id'].'" width=70%; src="products/'.$readrow['fld_product_image'].'"></td>';
 							}
 							else{
 								$img = 'products/nophoto.jpg';
@@ -229,21 +230,21 @@ include_once 'products_crud.php';
 	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script type="application/javascript">
-    var loadFile = function (event) {
-        var reader = new FileReader();
-        reader.onload = function () {
-            var output = document.getElementById('productPhoto');
-            output.src = reader.result;
-        };
-        reader.readAsDataURL(event.target.files[0]);
-        document.getElementById('productImageTitle').innerText = event.target.files[0]['name'];
-    };
+	var loadFile = function (event) {
+		var reader = new FileReader();
+		reader.onload = function () {
+			var output = document.getElementById('productPhoto');
+			output.src = reader.result;
+		};
+		reader.readAsDataURL(event.target.files[0]);
+		document.getElementById('productImageTitle').innerText = event.target.files[0]['name'];
+	};
 
-    $(document).ready(function () {
-        $("#productlist").DataTable({
-        "lengthMenu": [[5, 20, 50, -1], [5, 20, 50, "All"]]
-    });
-    });
+	$(document).ready(function () {
+		$("#productlist").DataTable({
+		"lengthMenu": [[5, 20, 50, -1], [5, 20, 50, "All"]]
+	});
+	});
 </script>
 </body>
 </html>
