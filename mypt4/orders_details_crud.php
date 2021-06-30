@@ -1,9 +1,5 @@
 <?php
- 
 include_once 'database.php';
- 
-$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
  
 //Create
 if (isset($_POST['addproduct'])) {
@@ -56,5 +52,4 @@ if (isset($_GET['delete'])) {
       echo "Error: " . $e->getMessage();
   }
 }
- 
 ?>

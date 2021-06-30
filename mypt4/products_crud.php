@@ -27,9 +27,6 @@ function uploadPhoto($file, $id)
 }
 
 
-$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
 //Create
 if (isset($_POST['create'])) {
 	$uploadStatus = uploadPhoto($_FILES['fileToUpload'], $_POST['pid']);
@@ -190,5 +187,4 @@ if ($num){
 else{
 	$num = 'P'.str_pad(1,3,"0",STR_PAD_LEFT);
 }
-$conn = null;
 ?>

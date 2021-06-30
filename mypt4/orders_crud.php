@@ -1,9 +1,6 @@
 <?php
 include_once 'database.php';
  
-$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
- 
 //Create
 if (isset($_POST['create'])) {
  
@@ -107,6 +104,4 @@ if (isset($_GET['edit'])) {
   else{
     $num = 'O'.str_pad(1,5,"0",STR_PAD_LEFT);
   }
-
-  $conn = null;
 ?>

@@ -17,7 +17,7 @@ if (isset($_GET['search'])) {
     $brand = (isset($data[2]) ? $data[2] : '');
 
     try {
-        $stmt = $db->prepare("SELECT * FROM `tbl_products_a173586` WHERE fld_product_name LIKE ? OR fld_product_price LIKE ? OR fld_product_brand LIKE ?");
+        $stmt = $conn->prepare("SELECT * FROM `tbl_products_a173586` WHERE fld_product_name LIKE ? OR fld_product_price LIKE ? OR fld_product_brand LIKE ?");
         $stmt->execute(["%{$search}%","%{$search}%", "%{$search}%"]);
         $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
