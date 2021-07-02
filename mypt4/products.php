@@ -50,7 +50,7 @@ include_once 'products_crud.php';
 					<div class="form-group">
 						<label for="productprice" class="col-sm-3 control-label">Price</label>
 						<div class="col-sm-9">
-							<input name="price" class="form-control" type="text" placeholder="Product Price" id="productprice" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_price']; ?>" required> 
+							<input name="price" class="form-control" type="number" step="0.01" placeholder="Product Price" id="productprice" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_price']; else echo 1 ?>" required> 
 						</div>
 					</div>
 					<div class="form-group">

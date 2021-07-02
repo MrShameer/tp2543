@@ -30,7 +30,7 @@ function uploadPhoto($file, $id)
 //Create
 if (isset($_POST['create'])) {
 	$uploadStatus = uploadPhoto($_FILES['fileToUpload'], $_POST['pid']);
-	if ($uploadStatus['status']==200) {
+	if (isset($uploadStatus['status'])) {
 		try {
 
 			$stmt = $conn->prepare("INSERT INTO tbl_products_a173586(fld_product_id,fld_product_name,fld_product_price,fld_product_type,fld_product_brand,fld_product_description,fld_product_quantity,fld_product_material, fld_product_image) VALUES(:pid, :name, :price, :type, :brand, :description, :quantity, :material, :image)");
@@ -82,7 +82,7 @@ if (isset($_POST['create'])) {
 //Update
 if (isset($_POST['update'])) {
 	try {
-		$stmt = $conn->prepare("UPDATE tbl_products_a173586 SET fld_product_id = :pid,fld_product_name = :name,fld_product_price = :price,fld_product_type = :type,fld_product_brand = :brand,fld_product_description = :description,fld_product_quantity = :quantity,fld_product_material = :material WHERE fld_product_id = :oldpid");
+		$stmt = $conn->prepare("UPDATE tbl_products_a173586 SET fld_product_name = :name,fld_product_price = :price,fld_product_type = :type,fld_product_brand = :brand,fld_product_description = :description,fld_product_quantity = :quantity,fld_product_material = :material WHERE fld_product_id = :pid");
 		
 		$stmt->bindParam(':pid', $pid, PDO::PARAM_STR);
 		$stmt->bindParam(':name', $name, PDO::PARAM_STR);
@@ -93,7 +93,7 @@ if (isset($_POST['update'])) {
 		$stmt->bindParam(':quantity', $quantity, PDO::PARAM_STR);
 		$stmt->bindParam(':material', $material, PDO::PARAM_INT);
 		//$stmt->bindParam(':image', $uploadStatus['name']);
-		$stmt->bindParam(':oldpid', $oldpid, PDO::PARAM_STR);
+		//$stmt->bindParam(':oldpid', $oldpid, PDO::PARAM_STR);
 		
 		$pid = $_POST['pid'];
 		$name = $_POST['name'];
@@ -104,7 +104,7 @@ if (isset($_POST['update'])) {
 		$quantity = $_POST['quantity'];
 		$material = $_POST['material'];
 		//$image = $_POST['image'];
-		$oldpid = $_POST['oldpid'];
+		//$oldpid = $_POST['oldpid'];
 		
 		$stmt->execute();
 
@@ -148,7 +148,7 @@ if (isset($_POST['update'])) {
 if (isset($_GET['delete'])) {
 	try {
 		$pid = $_GET['delete'];
-		$query = $conn->query("SELECT fld_product_image FROM tbl_products_a173586 WHERE fld_product_id = {$pid} LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+		$query = $conn->query("SELECT fld_product_image FROM tbl_products_a173586 WHERE fld_product_id = '{$pid}' LIMIT 1")->fetch(PDO::FETCH_ASSOC);
 		if (isset($query['fld_product_image'])) {
 			// Delete Query
 			$stmt = $conn->prepare("DELETE FROM tbl_products_a173586 WHERE fld_product_id = :pid");
@@ -157,12 +157,13 @@ if (isset($_GET['delete'])) {
 			// Delete Image
 			unlink("products/{$query['fld_product_image']}");
 		}
-		header("Location: products.php");  
 	}
 	catch(PDOException $e)
 	{
 		echo "Error: " . $e->getMessage();
 	}
+	header("LOCATION: {$_SERVER['PHP_SELF']}");
+    exit();
 }
 
 //Edit

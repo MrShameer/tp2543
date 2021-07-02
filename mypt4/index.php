@@ -20,8 +20,20 @@ require 'database.php';
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/themes/splide-sea-green.min.css">
-    <style type="text/css">
-    figure {
+<style type="text/css">
+/*body{
+     background-color: lightblue;
+}*/
+.splide__slide{
+  transform: scale(0.8, 0.8); /* sets all slides to a scaling of 0.8 (80%) */
+  display: inline-flex;  /* used for all slides vertical align center */
+  vertical-align: middle; /* used for all slides vertical align center */
+}
+.splide__slide.is-active{
+  transform: scale(1, 1); /* sets the active slide to scaling of 1 (100%) */
+}
+
+figure {
   display: table;
 }
 
@@ -29,6 +41,11 @@ figcaption {
   display: table-caption;
   caption-side: bottom;
 }
+li{
+    width: auto;
+}
+
+
 </style>
 </head>
 
@@ -104,10 +121,14 @@ figcaption {
                 beforeSend: function () {
                     $("body").addClass('loading');
                     input.addClass('disabled');
+                    if ($('.splide__list>li')[0]){
+                       $('.splide__list>li').remove();
+                    $('.scp').remove();
+                    }
+                    
                 },
                 success: function (res) {
-                    $('.splide__list').empty();
-
+                    
                     if (res.status == 200) {
                         $(".result-count").text(res.data.length);
 
@@ -128,15 +149,20 @@ figcaption {
                                 `);
                         });
                         $('.splide__list').append(
-                            `<script>
+                            `<script class="scp">
                                     var splide = new Splide( '.splide' ,{
                                         type        : 'loop',
                                         perPage     : 2,
                                         autoplay    : true,
                                         pauseOnHover: false,
-                                        gap        : 10,
+                                        trimSpace : false,
+                                        breakpoints: {
+                                            640: {
+                                                perPage: 2,
+                                            },
+                                        },
+                                        //gap        : 10,
                                         focus      : 'center',
-                                        
                                         //pagination:false
                                     }).mount();
                              <\/script>`)
@@ -144,6 +170,8 @@ figcaption {
                         $(".resultList").show("slow", function () {
                             $("body").removeClass('loading');
                         });
+                    }else{
+                        console.log(res.data);
                     }
                 },
                 complete: function () {
