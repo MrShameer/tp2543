@@ -30,7 +30,7 @@ if (isset($_GET['search'])) {
         foreach($data as $dat){
             $queries[] = "SELECT * FROM `tbl_products_a173586` WHERE {$field[0]} LIKE '%{$dat}%' OR {$field[1]} LIKE '%{$dat}%' OR {$field[2]} LIKE '%{$dat}%'";
         }
-        $sql = implode(' UNION ',$queries);
+        $sql = implode(' UNION ',$queries);//kalo nk tukr ni jadi INTERSECT untuk dapat refined search
         $stmt = $conn->prepare($sql);
 
 
