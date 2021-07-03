@@ -88,10 +88,10 @@ li{
         <div class="splide__progress">
             <div class="splide__progress__bar"></div>
         </div>
-        <div class="splide__autoplay">
+<!--         <div class="splide__autoplay">
             <button class="splide__play">Play</button>
             <button class="splide__pause">Pause</button>
-        </div>
+        </div> -->
     </div>
 
 </section>
@@ -121,10 +121,7 @@ li{
                 beforeSend: function () {
                     $("body").addClass('loading');
                     input.addClass('disabled');
-                    if ($('.splide__list>li')[0]){
-                       $('.splide__list>li').remove();
-                    $('.scp').remove();
-                    }
+                    
                     
                 },
                 success: function (res) {
@@ -132,6 +129,10 @@ li{
                     if (res.status == 200) {
                         $(".result-count").text(res.data.length);
 
+                        if ($('.splide__list>li')[0]){
+                            $('.splide__list').empty();
+                            $('.scp').remove();
+                        }
                         $.each(res.data, function (idx, data) {
                             if (data.fld_product_image === '')
                                 data.fld_product_image = data.fld_product_id + '.png';

@@ -1,11 +1,14 @@
 <?php
 include_once 'database.php';
-
+$extention = ['jpg', 'jpeg'];
+//$extention=array();
 function uploadPhoto($file, $id)
 {
+  global $extention;
+  //array_push($extention, 'jpg', 'jpeg');
 	$target_dir = "products/";
 	$imageFileType = strtolower(pathinfo(basename($file["name"]), PATHINFO_EXTENSION));
-	$extention = ['jpg', 'gif', 'png'];
+	
 	$newfilename = "{$id}.{$imageFileType}";
 
 	if ($file['error'] == 4)
