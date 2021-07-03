@@ -110,7 +110,7 @@ li{
         input.parent().removeClass('has-error');
         input.parent().find("#helpBlock2").text("");
 
-        if (val.length > 2) {
+        if (val.length > 2 && (val.split(" ").length==1 || val.split(" ").length==3)) {
             $.ajax({
                 url: 'search.php',
                 type: 'get',
@@ -127,6 +127,7 @@ li{
                 success: function (res) {
                     
                     if (res.status == 200) {
+                        console.log(res.data);
                         $(".result-count").text(res.data.length);
 
                         if ($('.splide__list>li')[0]){
@@ -159,7 +160,7 @@ li{
                                         trimSpace : false,
                                         breakpoints: {
                                             640: {
-                                                perPage: 2,
+                                                perPage: 4,
                                             },
                                         },
                                         //gap        : 10,
