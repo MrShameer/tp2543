@@ -63,7 +63,7 @@ li{
                     <form action="#" method="POST" id="searchForm">
                         <div class="form-group">
                             <input type="text" class="form-control text-center input-lg" id="inputSearch" name="search"
-                                   placeholder="Transformer 100.00 Plastic" autocomplete="off" required>
+                                   placeholder="Transformer 100.00 Hasbro" autocomplete="off" required>
                             <span id="helpBlock2" class="help-block"></span>
                         </div>
 
@@ -110,7 +110,8 @@ li{
         input.parent().removeClass('has-error');
         input.parent().find("#helpBlock2").text("");
 
-        if (val.length > 2 && (val.split(" ").length==1 || val.split(" ").length==3)) {
+        if (val.length > 2) {
+            //&& (val.split(" ").length==1 || val.split(" ").length==3)
             $.ajax({
                 url: 'search.php',
                 type: 'get',

@@ -3,14 +3,11 @@ header("Content-Type: application/json;Charset=UTF-8");
 require 'database.php';
 
 $Json = array();
-
 if (isset($_GET['search'])) {
+    //senang sikit nk ubahhh
+    $field = ['fld_product_name', 'fld_product_price' , 'fld_product_brand'];
     $search = htmlspecialchars($_GET['search']);
     $data = explode(" ", $search);
-
-    // 0 - name
-    // 1 - price
-    // 2 - brand
 
     $name = (isset($data[0]) ? $data[0] : '');
     $price = (isset($data[1]) ? $data[1] : '');
@@ -19,18 +16,19 @@ if (isset($_GET['search'])) {
     try {
         //kalo nk search pastu dapat specific product. like nk dapat product tu je
         /*if(count($data)<3){
-             $stmt = $conn->prepare("SELECT * FROM `tbl_products_a173586` WHERE fld_product_name LIKE ? OR fld_product_price LIKE ? OR fld_product_brand LIKE ?");
+             $stmt = $conn->prepare("SELECT * FROM `tbl_products_a173586` WHERE {$field[0]} LIKE ? OR {$field[1]} LIKE ? OR {$field[2]} LIKE ?");
              $stmt->execute(["%{$search}%","%{$search}%", "%{$search}%"]);
         }
         elseif(count($data)==3){
-            $stmt = $conn->prepare("SELECT * FROM `tbl_products_a173586` WHERE fld_product_name LIKE ? AND fld_product_price LIKE ? AND fld_product_brand LIKE ?");
+            $stmt = $conn->prepare("SELECT * FROM `tbl_products_a173586` WHERE {$field[0]} LIKE ? AND {$field[1]} LIKE ? AND {$field[2]} LIKE ?");
             $stmt->execute(["%{$name}%","%{$price}%", "%{$brand}%"]);
         }*/
+
 
         //kalo nk search any keyword and return all row yg ade words tu(harap faham) 
         $queries = array();
         foreach($data as $dat){
-            $queries[] = "SELECT * FROM `tbl_products_a173586` WHERE fld_product_name LIKE '%{$dat}%' OR fld_product_price LIKE '%{$dat}%' OR fld_product_brand LIKE '%{$dat}%'";
+            $queries[] = "SELECT * FROM `tbl_products_a173586` WHERE {$field[0]} LIKE '%{$dat}%' OR {$field[1]} LIKE '%{$dat}%' OR {$field[2]} LIKE '%{$dat}%'";
         }
         $sql = implode(' UNION ',$queries);
         $stmt = $conn->prepare($sql);
