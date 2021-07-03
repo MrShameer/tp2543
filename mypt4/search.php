@@ -25,7 +25,7 @@ if (isset($_GET['search'])) {
         }*/
 
 
-        //kalo nk search any keyword and return all row yg ade words tu(harap faham) 
+        //kalo nk search any keyword and return all row yg ade words tu(harap faham). Tak kisah berapa perkataan pun
         $queries = array();
         foreach($data as $dat){
             $queries[] = "SELECT * FROM `tbl_products_a173586` WHERE {$field[0]} LIKE '%{$dat}%' OR {$field[1]} LIKE '%{$dat}%' OR {$field[2]} LIKE '%{$dat}%'";
