@@ -133,11 +133,12 @@ if (isset($_POST['update'])) {
 			else
 				$_SESSION['error'] = "An unknown error has been occurred.";
 		}
-	} catch (PDOException $e) {
-		$_SESSION['error'] = $e->getMessage();
 	}
-	catch(PDOException $e){
-		echo "Error: " . $e->getMessage();
+	// catch (PDOException $e) {
+	// 	$_SESSION['error'] = $e->getMessage();
+	// }
+	catch(Exception $e){
+		$_SESSION['error'] = "Error while updating: " . $e->getMessage();
 	}
 	clearstatcache();//saja sebab kadang2 tk clear cache
 	if (isset($_SESSION['error']))
