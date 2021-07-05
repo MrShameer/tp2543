@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<title>Welcome To Hypers</title>
 	<link rel="shortcut icon" type="image/x-icon" href="products/hypers logo.ico"/>
-	<link href="login/login.css" rel="stylesheet">
 	<script src="../three.min.js"></script>
 	<script src='https://cdn.jsdelivr.net/gh/mrdoob/Three.js@r92/examples/js/loaders/GLTFLoader.js'></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="login/login.css" rel="stylesheet">
 </head>
 <body>
 	<?php
@@ -22,7 +22,7 @@
 		}
 
 		function randomfloat(min, max) {
-  			return Math.random() * (max - min) + min;
+			return Math.random() * (max - min) + min;
 		}
 
 		var models = <?php echo json_encode($models); ?>;
@@ -54,7 +54,7 @@
 				roadStripArray.push(gltf.scene);
 
 			}, undefined, function ( error ) {
-				console.log( error );
+				//console.warn( error );
 			});
 		}
 
@@ -82,18 +82,13 @@
 		animate();
 	</script>
 
-	<div class="container">
+	<div class="containers">
 		<form>
 			<p>Welcome</p>
 			<input type="email" placeholder="Email"><br>
 			<input type="password" placeholder="Password"><br>
 			<input type="button" value="Sign in"><br>
-			<a href="#" id="hint">Hint?</a>
-			<script type="text/javascript">
-				$(document).on("click","#hint",function(){
-					alert("A");
-				});
-			</script>
+			<a href="#" data-toggle="modal" data-target="#myModal">Hint?</a>
 		</form>
 
 		<div class="drops">
@@ -105,5 +100,48 @@
 		</div>
 
 	</div>
+
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Testing Account</h4>
+				</div>
+				<div class="modal-body">
+					<div class="list-group">
+						<div href="#" class="list-group-item">
+							<h4 class="list-group-item-heading">Admin Account</h4>
+							<p class="list-group-item-text">
+								<dl class="dl-horizontal">
+									<dt>Email</dt>
+									<dd>admin@hypers.com.my</dd>
+									<dt>Password</dt>
+									<dd>123</dd>
+								</dl>
+							</p>
+						</div>
+
+						<div href="#" class="list-group-item">
+							<h4 class="list-group-item-heading">Normal Staff Account</h4>
+							<p class="list-group-item-text">
+								<dl class="dl-horizontal">
+									<dt>Email</dt>
+									<dd>staff@hypers.com.my</dd>
+									<dt>Password</dt>
+									<dd>123</dd>
+								</dl>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

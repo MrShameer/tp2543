@@ -8,7 +8,7 @@ body
 	background-image: linear-gradient(#bdc3c7, #2c3e50);
 	font-family: Righteous, Concert One;
 }
-.container
+.containers
 {
 	position: absolute;
 	top: 50%;
@@ -31,6 +31,7 @@ form
 	position: relative;
 	-webkit-transition: all 0.2s ease-in-out;
 	transition: all 0.2s ease-in-out;
+	box-sizing: content-box;
 }
 form p
 {
