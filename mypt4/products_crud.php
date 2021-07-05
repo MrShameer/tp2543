@@ -127,7 +127,7 @@ if (isset($_POST['update'])) {
 			elseif ($flag == 1)
 				$_SESSION['error'] = "Sorry, only file with below 10MB are allowed.";
 			elseif ($flag == 2)
-				$_SESSION['error'] = "Sorry, only PNG & GIF files are allowed.";
+				$_SESSION['error'] = "Sorry, only ".join(", ",$extention)." files are allowed.";
 			elseif ($flag == 3)
 				$_SESSION['error'] = "Sorry, there was an error uploading your file.";
 			else
