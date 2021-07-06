@@ -81,20 +81,38 @@ require 'database.php';
 			<p>Found <span class="result-count">0</span> results.</p>
 		</div>
 
-		<div class="splide">
+		<!-- <div class="splide">
 			<div class="splide__track">
-				<ul class="splide__list"><!--tempat masuk card--></ul>
+				<ul class="splide__list"><!-tempat masuk card-></ul>
 			</div>
 			<div class="splide__progress">
 				<div class="splide__progress__bar"></div>
-			</div>
+			</div> -->
+			 <div class="row list-item"></div>
 		<!--<div class="splide__autoplay">
 			<button class="splide__play">Play</button>
 			<button class="splide__pause">Pause</button>
 		</div> -->
-	</div>
+		<script class="scp">
+			var splide = new Splide( '.splide' ,{
+				type        : 'loop',
+				perPage     : 2,
+				autoplay    : true,
+				pauseOnHover: false,
+				trimSpace : false,
+				breakpoints: {
+					640: {
+						perPage: 4,
+					},
+				},
+				//gap        : 10,
+				focus      : 'center',
+				pagination:true,
+			}).mount();
+		</script>
+		</div>
 
-</section>
+	</section>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -122,37 +140,88 @@ require 'database.php';
 				beforeSend: function () {
 					$("body").addClass('loading');
 					input.addClass('disabled');
-					
+					//$( ".scp" ).unbind();
 					
 				},
 				success: function (res) {
-					
+					$('.list-item').empty();
 					if (res.status == 200) {
 						//  console.log(res.data);
 						$(".result-count").text(res.data.length);
 
-						if ($('.splide__list>li')[0]){
-							$('.splide__list').empty();
-							$('.scp').remove();
-						}
+						//if ($('.scp')[0]){
+							//$('.splide__list').empty();
+							//$('.scp').remove();
+						//}
 						$.each(res.data, function (idx, data) {
 							if (data.fld_product_image === '')
 								data.fld_product_image = data.fld_product_id + '.png';
 
-							$('.splide__list').append(
-								`<li class="splide__slide">
-								<div class="splide__slide__container text-center">
-								<figure class="figure">
-								<img src="products/${data.fld_product_image}" alt="${data.fld_product_name}" style="height: 200px;" class="figure-img img-fluid rounded">
-								<figcaption class="figure-caption">${data.fld_product_name}</figcaption>
-								</figure>
-								<a href="products_details.php?pid=${data.fld_product_id}" class="btn btn-primary" role="button">View</a>
-								</div>
-								</li>
-								`);
+							// $('.splide__list').append(
+							// 	`<li class="splide__slide">
+							// 	<div class="splide__slide__container text-center">
+							// 	<figure class="figure">
+							// 	<img src="products/${data.fld_product_image}" alt="${data.fld_product_name}" style="height: 200px;" class="figure-img img-fluid rounded">
+							// 	<figcaption class="figure-caption">${data.fld_product_name}</figcaption>
+							// 	</figure>
+							// 	<a href="products_details.php?pid=${data.fld_product_id}" class="btn btn-primary" role="button">View</a>
+							// 	</div>
+							// 	</li>
+							// 	`);
+
+							 $('.list-item').append(`<div class="col-md-4">
+                                <div class="thumbnail thumbnail-dark">
+                                <img src="products/${data.fld_product_image}" alt="${data.fld_product_name}" style="height: 345px;">
+                                <div class="caption text-center">
+                                <h3>${data.fld_product_name}</h3>
+                                <p>
+                                <a href="products_details.php?pid=${data.fld_product_id}" class="btn btn-primary" role="button">View</a>
+                                </p>
+                                </div>
+                                </div>
+                                </div>`);
 						});
-						$('.splide__list').append(
+						$( ".scp" ).bind();
+						/*$('.splide__list').append(
 							`<script class="scp">
+							var splide = new Splide( '.splide' ,{
+								type        : 'loop',
+								perPage     : 2,
+								autoplay    : true,
+								pauseOnHover: false,
+								trimSpace : false,
+								breakpoints: {
+									640: {
+										perPage: 4,
+									},
+								},
+								focus      : 'center',
+							}).mount();
+							<\/script>`);*/
+
+						$(".resultList").show("slow", function () {
+							$("body").removeClass('loading');
+						});
+						$('html, body').animate({
+                                scrollTop: $("#resultSection").offset().top
+                            }, 500);
+					}else{
+						console.log(res.data);
+					}
+				},
+				complete: function () {
+					input.removeClass('disabled');
+				}
+			});
+		} else {
+			input.parent().addClass("has-error");
+			input.parent().find("#helpBlock2").text("Please enter more than 2 characters.");
+			$('.splide__list').empty();
+		}
+	});
+
+</script>
+<!-- <script class="scp">
 							var splide = new Splide( '.splide' ,{
 								type        : 'loop',
 								perPage     : 2,
@@ -168,26 +237,7 @@ require 'database.php';
 								focus      : 'center',
 								//pagination:false
 							}).mount();
-							<\/script>`)
-
-						$(".resultList").show("slow", function () {
-							$("body").removeClass('loading');
-						});
-					}else{
-						console.log(res.data);
-					}
-				},
-				complete: function () {
-					input.removeClass('disabled');
-				}
-			});
-		} else {
-			input.parent().addClass("has-error");
-			input.parent().find("#helpBlock2").text("Please enter more than 2 characters.");
-			$('.splide__list').empty();
-		}
-	});
-</script>
+							</script> -->
 	<!--div id="img">
 		<script type="text/javascript">
 			var bd = document.body;

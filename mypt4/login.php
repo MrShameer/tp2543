@@ -43,7 +43,7 @@
 
 		for(let [key, value] of Object.entries(models)){
 			loader.load('login/models/'+value, function ( gltf ) {
-				gltf.scene.position.set(random(-15,15),random(10,20),0);
+				gltf.scene.position.set(random(-15,15),random(10,30),0);
 				gltf.scene.traverse( function ( child ) {
 					if ( child.isMesh ) {
 						child.material.emissive =  child.material.color;
@@ -71,7 +71,7 @@
 				a.rotation.y += 0.01;
 				/*a.position.addScaledVector(direction, speed * delta);*/
 				if (a.position.y <= -10) {
-					a.position.set(random(-15,15),random(10,20),0);
+					a.position.set(random(-15,15),random(10,30),0);
 				} else {
 				}
 
