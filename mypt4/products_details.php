@@ -10,6 +10,7 @@ include_once 'database.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hypers Ordering System : Products Details</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="shortcut icon" type="image/x-icon" href="products/hypers logo.ico"/>
 </head>
 <body>
 
@@ -62,7 +63,7 @@ include_once 'database.php';
 							<td>RM <?php echo $readrow['fld_product_price'] ?></td>
 						</tr>
 						<tr>
-							<td><strong>Brand</strong></td>
+							<td><strong>Type</strong></td>
 							<td><?php echo $readrow['fld_product_type'] ?></td>
 						</tr>
 						<tr>
@@ -70,15 +71,15 @@ include_once 'database.php';
 							<td><?php echo $readrow['fld_product_brand'] ?></td>
 						</tr>
 						<tr>
-							<td><strong>Condition</strong></td>
+							<td><strong>Description</strong></td>
 							<td><?php echo $readrow['fld_product_description'] ?></td>
 						</tr>
 						<tr>
-							<td><strong>Manufacturing Year</strong></td>
+							<td><strong>Quantity</strong></td>
 							<td><?php echo $readrow['fld_product_quantity'] ?></td>
 						</tr>
 						<tr>
-							<td><strong>Quantity</strong></td>
+							<td><strong>Material</strong></td>
 							<td><?php echo $readrow['fld_product_material'] ?></td>
 						</tr>
 					</table>

@@ -22,7 +22,16 @@
 			<li><a href="customers.php">Customers</a></li>
 			<li><a href="staffs.php">Staffs</a></li>
 			<li><a href="orders.php">Orders</a></li>
+			<li><a href="logout.php" data-toggle="tooltip" id="out"><span class="glyphicon glyphicon-log-out"></span></a></li>
 		</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 </nav>
+<script type="text/javascript">
+	$(function(){
+    $("#out").tooltip({
+        placement: "bottom",
+        title: "Log Out"
+    });
+});
+</script>

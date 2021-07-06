@@ -158,8 +158,11 @@ include_once 'orders_crud.php';
 							<td><?php echo $orderrow['fld_customer_name'];?></td>
 							<td>
 								<a href="orders_details.php?oid=<?php echo $orderrow['fld_order_id']; ?>"  class="btn btn-warning btn-xs" role="button">Details</a>
-								<a href="orders.php?edit=<?php echo $orderrow['fld_order_id']; ?>" class="btn btn-success btn-xs" role="button">Edit</a>
-								<a href="orders.php?delete=<?php echo $orderrow['fld_order_id']; ?>" class="btn btn-danger btn-xs" role="button" onclick="return confirm('Are you sure to delete?');">Delete</a>
+								<?php
+									if($_SESSION['user']['fld_staff_role'] == 'Admin'){ ?>
+										<a href="orders.php?edit=<?php echo $orderrow['fld_order_id']; ?>" class="btn btn-success btn-xs" role="button">Edit</a>
+										<a href="orders.php?delete=<?php echo $orderrow['fld_order_id']; ?>" class="btn btn-danger btn-xs" role="button" onclick="return confirm('Are you sure to delete?');">Delete</a>
+								<?php } ?>
 							</td>
 						</tr>
 						<?php

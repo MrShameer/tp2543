@@ -1,3 +1,43 @@
+<?php
+	require_once 'database.php';
+	if (isset($_SESSION['loggedin']))
+    	header("LOCATION: index.php");
+
+    if (isset($_POST['userid'], $_POST['password'])) {
+    $UserID = htmlspecialchars($_POST['userid']);
+    $Pass = $_POST['password'];
+
+    if (empty($UserID) || empty($Pass)) {
+        $_SESSION['error'] = 'Please fill in the blanks.';
+    } else {
+        $stmt = $conn->prepare("SELECT * FROM tbl_staffs_a173586 WHERE (fld_staff_id = :id OR fld_staff_email = :id) LIMIT 1");
+        $stmt->bindParam(':id', $UserID);
+
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (isset($user['fld_staff_id'])) {
+            if ($user['fld_staff_password'] == $Pass) {
+                unset($user['fld_staff_password']);
+                $_SESSION['loggedin'] = true;
+                $_SESSION['user'] = $user;
+
+                header("LOCATION: index.php");
+                exit();
+            } else {
+                $_SESSION['error'] = 'Invalid login credentials. Please try again.';
+            }
+        } else {
+            $_SESSION['error'] = 'Account does not exist.';
+        }
+    }
+
+    header("LOCATION: " . $_SERVER['REQUEST_URI']);
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +50,7 @@
 	<link href="login/login.css" rel="stylesheet">
 </head>
 <body>
+	<h6>Three Js By Shameer Ali</h6> 
 	<?php
 	$models = array_diff(scandir('login/models/'), array('..', '.'));
 	?>
@@ -64,11 +105,20 @@
 		scene.add( light );
 		const animate = function () {
 			requestAnimationFrame( animate );
-
+			let i=0;
 			for(let a of roadStripArray){
+				if(i%2==0){
+					a.rotation.x += 0.01;
+					a.rotation.y += 0.01;
+				}
+				else{
+					a.rotation.x -= 0.01;
+					a.rotation.y -= 0.01;
+				}
+				i+=1;
 				a.position.y -= 0.02;
-				a.rotation.x += 0.01;
-				a.rotation.y += 0.01;
+				//a.rotation.x += 0.01;
+				//a.rotation.y += 0.01;
 				/*a.position.addScaledVector(direction, speed * delta);*/
 				if (a.position.y <= -10) {
 					a.position.set(random(-15,15),random(10,30),0);
@@ -83,11 +133,17 @@
 	</script>
 
 	<div class="containers">
-		<form>
-			<p>Welcome</p>
-			<input type="email" placeholder="Email"><br>
-			<input type="password" placeholder="Password"><br>
-			<input type="button" value="Sign in"><br>
+		<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="POST">
+			<p>Welcome To Hypers<br>Toy Store</p>
+			<input type="email" placeholder="Email" name="userid"><br>
+			<input type="password" placeholder="Password" name="password"><br>
+			                <?php
+                if (isset($_SESSION['error'])) {
+                    echo "<p id='error' class='text-danger text-center'>{$_SESSION['error']}</p>";
+                    unset($_SESSION['error']);
+                }
+                ?>
+			<input type="submit" value="Sign in"><br>
 			<a href="#" data-toggle="modal" data-target="#myModal">Hint?</a>
 		</form>
 
@@ -141,6 +197,8 @@
 			</div>
 		</div>
 	</div>
+
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </body>

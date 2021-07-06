@@ -9,6 +9,7 @@ include_once 'products_crud.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hypers Ordering System : Products</title>
 	<?php include_once 'nav_bar.php';?>
+	<style type="text/css"></style>
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
 	<style type="text/css">
 		tr .btn{
@@ -18,13 +19,28 @@ include_once 'products_crud.php';
 		input[type="file"] {
 			display: none;
 		}
+		td img {cursor: pointer;}
+		body{
+			padding-bottom: 20px;
+			/*background-image: linear-gradient(#bdc3c7, #2c3e50);
+			background-attachment: fixed;*/
+		}
+		/*#productlist_info, 
+		#productlist_previous, 
+		.dataTables_wrapper 
+		.dataTables_paginate 
+		.paginate_button, 
+		.ellipsis, 
+		.productlist_next {
+			color: white !important;
+		}*/
 	</style>
 </head>
 <body>
 	<div class="container-fluid">
 
 		<div class="row">
-			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+			<div id="form" class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 				<div class="page-header">
 					<h2>Create New Product</h2>
 				</div>
@@ -34,7 +50,8 @@ include_once 'products_crud.php';
 						unset($_SESSION['error']);
 					}
 					?>
-				<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" class="form-horizontal" enctype="multipart/form-data" >
+					
+				<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" class="form-horizontal" enctype="multipart/form-data" style="backdrop-filter: blur(10px);">
 					<div class="form-group">
 						<label for="pid" class="col-sm-3 control-label">ID</label>
 						<div class="col-sm-9">
@@ -44,7 +61,7 @@ include_once 'products_crud.php';
 					<div class="form-group">
 						<label for="productname" class="col-sm-3 control-label">Name</label>
 						<div class="col-sm-9">
-							<input name="name" class="form-control" type="text" placeholder="Product Name" id="productname" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_name']; ?>" required> 
+							<input name="name" class="form-control" type="text" placeholder="Product Name" id="productname" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_name'];?>" required> 
 						</div>
 					</div>
 					<div class="form-group">
@@ -147,8 +164,17 @@ include_once 'products_crud.php';
 							</div>
 						</div>
 					</div>
-				</form>
+				</form>	
 			</div>
+			<?php 
+				if($_SESSION['user']['fld_staff_role'] == 'Staff'){
+					//kalo nk disable form je
+					//echo '<script>$("form :input").prop("disabled", true);</script>';
+
+					//kalo nk remove terus form
+					echo '<script>$("#form").remove();</script>';
+				}
+			?>
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
@@ -163,10 +189,10 @@ include_once 'products_crud.php';
 						<th>Price</th>
 						<th>Type</th>
 						<th>Brand</th>
-						<th>Description</th>
+						<!-- <th>Description</th> -->
 						<th>Quantity</th>
 						<th>Material</th>
-						<th>Imange</th>
+						<th>Imange<br><small>(Clickable)</small></th>
 						<th></th>
 					</tr>
 					</thead>
@@ -190,12 +216,12 @@ include_once 'products_crud.php';
 							<td><?php echo 'RM'.$readrow['fld_product_price']; ?></td>
 							<td><?php echo $readrow['fld_product_type']; ?></td>
 							<td><?php echo $readrow['fld_product_brand']; ?></td>
-							<td><?php echo $readrow['fld_product_description']; ?></td>
+							<!-- <td><?php //echo $readrow['fld_product_description']; ?></td> -->
 							<td><?php echo $readrow['fld_product_quantity']; ?></td>
 							<td><?php echo $readrow['fld_product_material']; ?></td>
 							<?php if(file_exists('products/'. $readrow['fld_product_image'])){
 								$img = 'products/'.$readrow['fld_product_image'];
-								echo '<td><img data-toggle="modal" data-target="#'.$readrow['fld_product_id'].'" width=70%; src="products/'.$readrow['fld_product_image'].'"></td>';
+								echo '<td><img data-toggle="modal" data-target="#'.$readrow['fld_product_id'].'" width=150px; src="products/'.$readrow['fld_product_image'].'"></td>';
 							}
 							else{
 								$img = 'products/nophoto.jpg';
@@ -211,8 +237,11 @@ include_once 'products_crud.php';
 
 							<td>
 								<a href="products_details.php?pid=<?php echo $readrow['fld_product_id']; ?>" class="btn btn-warning btn-xs" role="button">Details</a>
-								<a href="products.php?edit=<?php echo $readrow['fld_product_id']; ?>" class="btn btn-success btn-xs" role="button"> Edit </a>
-								<a href="products.php?delete=<?php echo $readrow['fld_product_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
+								<?php
+									if($_SESSION['user']['fld_staff_role'] == 'Admin'){ ?>
+										<a href="products.php?edit=<?php echo $readrow['fld_product_id']; ?>" class="btn btn-success btn-xs" role="button"> Edit </a>
+										<a href="products.php?delete=<?php echo $readrow['fld_product_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
+								<?php } ?>
 							</td>
 						</tr>
 

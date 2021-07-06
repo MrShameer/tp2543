@@ -5,12 +5,16 @@
 
 <?php
 require 'database.php';
-
+	if (!isset($_SESSION['loggedin']))
+    	header("LOCATION: login.php");
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
+	<script src="../three.min.js"></script>
+	<script src='https://cdn.jsdelivr.net/gh/mrdoob/Three.js@r92/examples/js/loaders/GLTFLoader.js'></script>
+
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,9 +25,6 @@ require 'database.php';
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/themes/splide-sea-green.min.css">
 	<style type="text/css">
-/*body{
-	 background-color: lightblue;
-	 }*/
 	 .splide__slide{
 	 	transform: scale(0.8, 0.8); /* sets all slides to a scaling of 0.8 (80%) */
 	 	display: inline-flex;  /* used for all slides vertical align center */
@@ -44,14 +45,96 @@ require 'database.php';
 	 li{
 	 	width: auto;
 	 }
-
-
+	 canvas{
+	 	position: fixed;
+	 	top: 0;
+	 	z-index: -10;
+	 }
 	</style>
 </head>
 
 <body>
+	
+
 	<section class="container-fluid">
-		<div class="container content">
+		<?php
+	$models = array_diff(scandir('login/models/'), array('..', '.'));
+	?>
+	
+	<script type="text/javascript">
+		function random(min, max) {
+			min = Math.ceil(min);
+			max = Math.floor(max);
+			return Math.floor(Math.random() * (max - min + 1) + min); 
+		}
+
+		function randomfloat(min, max) {
+			return Math.random() * (max - min) + min;
+		}
+
+		var models = <?php echo json_encode($models); ?>;
+
+		let roadStripArray = [];
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 100000 );
+
+		const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true });
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+		window.addEventListener('resize', () => {
+			renderer.setSize(window.innerWidth,window.innerHeight);
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+		})
+		var loader = new THREE.GLTFLoader();
+
+		for(let [key, value] of Object.entries(models)){
+			loader.load('login/models/'+value, function ( gltf ) {
+				gltf.scene.position.set(random(-15,15),random(10,30),0);
+				gltf.scene.traverse( function ( child ) {
+					if ( child.isMesh ) {
+						child.material.emissive =  child.material.color;
+						child.material.emissiveMap = child.material.map ;
+					}
+				});
+				scene.add( gltf.scene );
+				roadStripArray.push(gltf.scene);
+
+			}, undefined, function ( error ) {
+				//console.warn( error );
+			});
+		}
+
+		camera.position.z = 10;
+
+		const light = new THREE.AmbientLight( 0xf0f0f0, 1);
+		scene.add( light );
+		const animate = function () {
+			requestAnimationFrame( animate );
+			let i=0;
+			for(let a of roadStripArray){
+				if(i%2==0){
+					a.rotation.x += 0.01;
+					a.rotation.y += 0.01;
+				}
+				else{
+					a.rotation.x -= 0.01;
+					a.rotation.y -= 0.01;
+				}
+				i+=1;
+				a.position.y -= 0.02;
+				if (a.position.y <= -10) {
+					a.position.set(random(-15,15),random(10,30),0);
+				} else {
+				}
+
+			}
+			renderer.render( scene, camera );
+		};
+
+		animate();
+	</script>
+		<div class="container content" id="searchbox">
 			<div class="text-center" style="margin-bottom: 3rem;">
 				<div class="row">
 					<div class="col-md-12">
@@ -93,7 +176,8 @@ require 'database.php';
 			<button class="splide__play">Play</button>
 			<button class="splide__pause">Pause</button>
 		</div> -->
-		<script class="scp">
+		
+		<!-- <script class="scp">
 			var splide = new Splide( '.splide' ,{
 				type        : 'loop',
 				perPage     : 2,
@@ -109,14 +193,12 @@ require 'database.php';
 				focus      : 'center',
 				pagination:true,
 			}).mount();
-		</script>
+		</script> -->
 		</div>
 
 	</section>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 <script>
 	$("#searchForm").submit(function (e) {

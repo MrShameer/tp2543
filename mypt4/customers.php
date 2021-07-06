@@ -12,11 +12,17 @@ include_once 'customers_crud.php';
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="row">
+		<div class="row" id="form">
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 				<div class="page-header">
 					<h2>Create New Customer</h2>
 				</div>
+				<?php
+					if (isset($_SESSION['error'])) {
+						echo "<p class='text-danger text-center'>{$_SESSION['error']}</p>";
+						unset($_SESSION['error']);
+					}
+				?>
 				<form action="customers.php" method="post" class="form-horizontal">
 					<div class="form-group">
 						<label for="cid" class="col-sm-3 control-label">Customer ID</label>
@@ -75,6 +81,15 @@ include_once 'customers_crud.php';
 			</div>
 		</div>
 
+		<?php 
+			if($_SESSION['user']['fld_staff_role'] == 'Staff'){
+				//kalo nk disable form je
+				//echo '<script>$("form :input").prop("disabled", true);</script>';
+
+				//kalo nk remove terus form
+				echo '<script>$("#form").remove();</script>';
+			}
+		?>
 
 		<div class="row">
 			<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
@@ -89,10 +104,12 @@ include_once 'customers_crud.php';
 						<th>Email</th>
 						<th>Address</th>
 						<th>Age</th>
-						<th></th>
+						<?php
+							if($_SESSION['user']['fld_staff_role'] == 'Admin') echo '<th></th>'
+						?>
 					</tr>
 					<?php
-			// Read
+
 					$per_page = 5;
 					if (isset($_GET["page"]))
 						$page = $_GET["page"];
@@ -118,14 +135,16 @@ include_once 'customers_crud.php';
 							<td><?php echo $readrow['fld_customer_email']; ?></td>
 							<td><?php echo $readrow['fld_customer_address']; ?></td>
 							<td><?php echo $readrow['fld_customer_age']; ?></td>
-							<td>
-								<a href="customers.php?edit=<?php echo $readrow['fld_customer_id']; ?>" class="btn btn-success btn-xs" role="button"> Edit </a>
-								<a href="customers.php?delete=<?php echo $readrow['fld_customer_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
-							</td>
+							<?php
+								if($_SESSION['user']['fld_staff_role'] == 'Admin'){ ?>
+									<td>
+										<a href="customers.php?edit=<?php echo $readrow['fld_customer_id']; ?>" class="btn btn-success btn-xs" role="button"> Edit </a>
+										<a href="customers.php?delete=<?php echo $readrow['fld_customer_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
+									</td>
+							<?php } ?>
 						</tr>
 						<?php
 					}
-					
 					$conn = null;
 					?>
 				</table>
