@@ -2,19 +2,14 @@
   Matric Number: A173586
   Name: Mohamed Shameer Ali 
 -->
-
 <?php
 require 'database.php';
-	if (!isset($_SESSION['loggedin']))
-    	header("LOCATION: login.php");
+if (!isset($_SESSION['loggedin']))
+	header("LOCATION: login.php");
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
-	<script src="../three.min.js"></script>
-	<script src='https://cdn.jsdelivr.net/gh/mrdoob/Three.js@r92/examples/js/loaders/GLTFLoader.js'></script>
-
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,115 +20,37 @@ require 'database.php';
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/themes/splide-sea-green.min.css">
 	<style type="text/css">
-	 .splide__slide{
-	 	transform: scale(0.8, 0.8); /* sets all slides to a scaling of 0.8 (80%) */
-	 	display: inline-flex;  /* used for all slides vertical align center */
-	 	vertical-align: middle; /* used for all slides vertical align center */
-	 }
-	 .splide__slide.is-active{
-	 	transform: scale(1, 1); /* sets the active slide to scaling of 1 (100%) */
-	 }
+	.splide__slide{
+		transform: scale(0.8, 0.8); /* sets all slides to a scaling of 0.8 (80%) */
+		display: inline-flex;  /* used for all slides vertical align center */
+		vertical-align: middle; /* used for all slides vertical align center */
+	}
+	.splide__slide.is-active{
+		transform: scale(1, 1); /* sets the active slide to scaling of 1 (100%) */
+	}
 
-	 figure {
-	 	display: table;
-	 }
+	figure {
+		display: table;
+	}
 
-	 figcaption {
-	 	display: table-caption;
-	 	caption-side: bottom;
-	 }
-	 li{
-	 	width: auto;
-	 }
-	 canvas{
-	 	position: fixed;
-	 	top: 0;
-	 	z-index: -10;
-	 }
-	</style>
+	figcaption {
+		display: table-caption;
+		caption-side: bottom;
+	}
+	li{
+		width: auto;
+	}
+	canvas{
+		position: fixed;
+		top: 0;
+		z-index: -10;
+	}
+</style>
 </head>
 
 <body>
-	
-
 	<section class="container-fluid">
-		<?php
-	$models = array_diff(scandir('login/models/'), array('..', '.'));
-	?>
-	
-	<script type="text/javascript">
-		function random(min, max) {
-			min = Math.ceil(min);
-			max = Math.floor(max);
-			return Math.floor(Math.random() * (max - min + 1) + min); 
-		}
-
-		function randomfloat(min, max) {
-			return Math.random() * (max - min) + min;
-		}
-
-		var models = <?php echo json_encode($models); ?>;
-
-		let roadStripArray = [];
-		const scene = new THREE.Scene();
-		const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 100000 );
-
-		const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true });
-		renderer.setSize( window.innerWidth, window.innerHeight );
-		document.body.appendChild( renderer.domElement );
-		window.addEventListener('resize', () => {
-			renderer.setSize(window.innerWidth,window.innerHeight);
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-		})
-		var loader = new THREE.GLTFLoader();
-
-		for(let [key, value] of Object.entries(models)){
-			loader.load('login/models/'+value, function ( gltf ) {
-				gltf.scene.position.set(random(-15,15),random(10,30),0);
-				gltf.scene.traverse( function ( child ) {
-					if ( child.isMesh ) {
-						child.material.emissive =  child.material.color;
-						child.material.emissiveMap = child.material.map ;
-					}
-				});
-				scene.add( gltf.scene );
-				roadStripArray.push(gltf.scene);
-
-			}, undefined, function ( error ) {
-				//console.warn( error );
-			});
-		}
-
-		camera.position.z = 10;
-
-		const light = new THREE.AmbientLight( 0xf0f0f0, 1);
-		scene.add( light );
-		const animate = function () {
-			requestAnimationFrame( animate );
-			let i=0;
-			for(let a of roadStripArray){
-				if(i%2==0){
-					a.rotation.x += 0.01;
-					a.rotation.y += 0.01;
-				}
-				else{
-					a.rotation.x -= 0.01;
-					a.rotation.y -= 0.01;
-				}
-				i+=1;
-				a.position.y -= 0.02;
-				if (a.position.y <= -10) {
-					a.position.set(random(-15,15),random(10,30),0);
-				} else {
-				}
-
-			}
-			renderer.render( scene, camera );
-		};
-
-		animate();
-	</script>
+		<?php include_once 'login/background.php'; ?>
 		<div class="container content" id="searchbox">
 			<div class="text-center" style="margin-bottom: 3rem;">
 				<div class="row">
@@ -171,12 +88,12 @@ require 'database.php';
 			<div class="splide__progress">
 				<div class="splide__progress__bar"></div>
 			</div> -->
-			 <div class="row list-item"></div>
+			<div class="row list-item"></div>
 		<!--<div class="splide__autoplay">
 			<button class="splide__play">Play</button>
 			<button class="splide__pause">Pause</button>
 		</div> -->
-		
+
 		<!-- <script class="scp">
 			var splide = new Splide( '.splide' ,{
 				type        : 'loop',
@@ -194,9 +111,9 @@ require 'database.php';
 				pagination:true,
 			}).mount();
 		</script> -->
-		</div>
+	</div>
 
-	</section>
+</section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -251,17 +168,17 @@ require 'database.php';
 							// 	</li>
 							// 	`);
 
-							 $('.list-item').append(`<div class="col-md-4">
-                                <div class="thumbnail thumbnail-dark">
-                                <img src="products/${data.fld_product_image}" alt="${data.fld_product_name}" style="height: 345px;">
-                                <div class="caption text-center">
-                                <h3>${data.fld_product_name}</h3>
-                                <p>
-                                <a href="products_details.php?pid=${data.fld_product_id}" class="btn btn-primary" role="button">View</a>
-                                </p>
-                                </div>
-                                </div>
-                                </div>`);
+							$('.list-item').append(`<div class="col-md-4">
+								<div class="thumbnail thumbnail-dark">
+								<img src="products/${data.fld_product_image}" alt="${data.fld_product_name}" style="height: 345px;">
+								<div class="caption text-center">
+								<h3>${data.fld_product_name}</h3>
+								<p>
+								<a href="products_details.php?pid=${data.fld_product_id}" class="btn btn-primary" role="button">View</a>
+								</p>
+								</div>
+								</div>
+								</div>`);
 						});
 						$( ".scp" ).bind();
 						/*$('.splide__list').append(
@@ -281,20 +198,20 @@ require 'database.php';
 							}).mount();
 							<\/script>`);*/
 
-						$(".resultList").show("slow", function () {
-							$("body").removeClass('loading');
-						});
-						$('html, body').animate({
-                                scrollTop: $("#resultSection").offset().top
-                            }, 500);
-					}else{
-						console.log(res.data);
+							$(".resultList").show("slow", function () {
+								$("body").removeClass('loading');
+							});
+							$('html, body').animate({
+								scrollTop: $("#resultSection").offset().top
+							}, 500);
+						}else{
+							console.log(res.data);
+						}
+					},
+					complete: function () {
+						input.removeClass('disabled');
 					}
-				},
-				complete: function () {
-					input.removeClass('disabled');
-				}
-			});
+				});
 		} else {
 			input.parent().addClass("has-error");
 			input.parent().find("#helpBlock2").text("Please enter more than 2 characters.");
@@ -319,7 +236,7 @@ require 'database.php';
 								focus      : 'center',
 								//pagination:false
 							}).mount();
-							</script> -->
+						</script> -->
 	<!--div id="img">
 		<script type="text/javascript">
 			var bd = document.body;
