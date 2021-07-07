@@ -47,7 +47,7 @@ require 'database.php';
 	<?php
 	    unset($_SESSION);
 	    session_destroy();
-		header( "refresh:6;url=login.php");
+		header("refresh:6;url=login.php");
 	?>
 	<script>
 		window.dotsGoingUp = true;
