@@ -14,7 +14,6 @@ require 'database.php';
 		height: 100%;
 	}
 	body{
-
 		background-image: linear-gradient(#bdc3c7, #2c3e50);
 		font-family: Righteous, Concert One;
 		margin: 0;
@@ -48,7 +47,7 @@ require 'database.php';
 	<?php
 	    unset($_SESSION);
 	    session_destroy();
-		header( "refresh:7;url=login.php");
+		header( "refresh:6;url=login.php");
 	?>
 	<script>
 		window.dotsGoingUp = true;

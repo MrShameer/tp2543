@@ -89,7 +89,8 @@
 							<p class="list-group-item-text">
 								<dl class="dl-horizontal">
 									<dt>Email</dt>
-									<dd>admin@hypers.com.my</dd>
+									<!-- <dd>admin@hypers.com.my</dd> -->
+									<dd>abu@gmail.com</dd>
 									<dt>Password</dt>
 									<dd>123</dd>
 								</dl>
@@ -101,7 +102,8 @@
 							<p class="list-group-item-text">
 								<dl class="dl-horizontal">
 									<dt>Email</dt>
-									<dd>staff@hypers.com.my</dd>
+									<!-- <dd>staff@hypers.com.my</dd> -->
+									<dd>samad@gmail.com</dd>
 									<dt>Password</dt>
 									<dd>123</dd>
 								</dl>

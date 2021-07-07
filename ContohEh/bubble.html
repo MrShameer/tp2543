@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+	body{
+		margin: 0;
+	}
+	canvas{
+		position: fixed;
+		top: 0;
+		z-index: -10;
+	}
+	</style>
+
+	<script src="../three.min.js"></script>
+	<script src='https://cdn.jsdelivr.net/gh/mrdoob/Three.js@r92/examples/js/loaders/GLTFLoader.js'></script>
+</head>
+<body>
+	<script type="text/javascript">
+		function randomfloat(min, max) {
+			return Math.random() * (max - min) + min;
+		}
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 100000 );
+
+		const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true });
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+		window.addEventListener('resize', () => {
+			renderer.setSize(window.innerWidth,window.innerHeight);
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+		})
+		var material = new THREE.MeshStandardMaterial( { color: 0x469bef, transparent:true, opacity: 0.1 } );
+		var model=[]; number=15;
+		var loader = new THREE.GLTFLoader();
+		for (let i = 0; i < number; i++) {
+			loader.load('bubbles.glb', function ( gltf ) {
+				model[i]=gltf.scene;
+				let scale = randomfloat(.9,.2);
+				model[i].scale.set(scale, scale, scale);
+				model[i].traverse((o) => {
+					if (o.isMesh) o.material = material;
+				});
+				gltf.scene.position.set(randomfloat(-15,15),randomfloat(-10,-30),0);
+			scene.add(model[i]);
+
+		}, undefined, function ( error ) {
+				console.warn('Pishang'+error);
+			});
+		}
+		
+		camera.position.z = 10;
+
+		const light = new THREE.AmbientLight( 0xf0f0f0, 1);
+		scene.add( light );
+		const animate = function () {
+			requestAnimationFrame( animate );
+			let i=0;
+			for(let a of model){
+				a.position.y += 0.02;
+				if(i%4==0){
+					a.rotation.x += 0.01;
+					a.rotation.y += 0.01;
+				}
+				else if(i%4==1){
+					a.rotation.x -= 0.01;
+					a.rotation.y -= 0.01;
+				}
+				else if(i%4==2){
+					a.rotation.x += 0.01;
+					a.rotation.y -= 0.01;
+				}
+				else{
+					a.rotation.x -= 0.01;
+					a.rotation.y += 0.01;
+				}
+				i+=1;
+
+				if (a.position.y >= 10) {
+					a.position.set(randomfloat(-15,15),randomfloat(-10,-30),0);
+				} else {
+				}
+			}
+		renderer.render( scene, camera );
+	};
+
+	animate();
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</body>
+</html>
+
