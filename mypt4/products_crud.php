@@ -2,7 +2,7 @@
 include_once 'database.php';
 if (!isset($_SESSION['loggedin']))
 	header("LOCATION: login.php");
-$extention = ['jpg', 'jpeg'];
+$extention = ['jpg', 'jpeg','gif'];
 function uploadPhoto($file, $id)
 {
 	global $extention;
