@@ -17,7 +17,7 @@ $models = array_diff(scandir('login/models/'), array('..', '.'));
 
 	var models = <?php echo json_encode($models); ?>;
 
-	let roadStripArray = [];
+	let toys = [];
 	const scene = new THREE.Scene();
 	const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 100000 );
 
@@ -41,7 +41,7 @@ $models = array_diff(scandir('login/models/'), array('..', '.'));
 				}
 			});
 			scene.add( gltf.scene );
-			roadStripArray.push(gltf.scene);
+			toys.push(gltf.scene);
 
 		}, undefined, function ( error ) {
 				//console.warn( error );
@@ -55,7 +55,7 @@ $models = array_diff(scandir('login/models/'), array('..', '.'));
 	const animate = function () {
 		requestAnimationFrame( animate );
 		let i=0;
-		for(let a of roadStripArray){
+		for(let a of toys){
 			if(i%4==0){
 				a.rotation.x += 0.01;
 				a.rotation.y += 0.01;
@@ -86,4 +86,4 @@ $models = array_diff(scandir('login/models/'), array('..', '.'));
 
 	animate();
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->

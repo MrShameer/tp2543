@@ -92,7 +92,7 @@ include_once 'customers_crud.php';
 						<th></th>
 					</tr>
 					<?php
-			// Read
+					// Read
 					$per_page = 5;
 					if (isset($_GET["page"]))
 						$page = $_GET["page"];
