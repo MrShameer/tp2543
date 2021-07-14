@@ -20,32 +20,23 @@ if (!isset($_SESSION['loggedin']))
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/themes/splide-sea-green.min.css">
 	<style type="text/css">
-	.splide__slide{
-		transform: scale(0.8, 0.8); /* sets all slides to a scaling of 0.8 (80%) */
-		display: inline-flex;  /* used for all slides vertical align center */
-		vertical-align: middle; /* used for all slides vertical align center */
-	}
-	.splide__slide.is-active{
-		transform: scale(1, 1); /* sets the active slide to scaling of 1 (100%) */
-	}
+		figure {
+			display: table;
+		}
 
-	figure {
-		display: table;
-	}
-
-	figcaption {
-		display: table-caption;
-		caption-side: bottom;
-	}
-	li{
-		width: auto;
-	}
-	canvas{
-		position: fixed;
-		top: 0;
-		z-index: -10;
-	}
-</style>
+		figcaption {
+			display: table-caption;
+			caption-side: bottom;
+		}
+		li{
+			width: auto;
+		}
+		canvas{
+			position: fixed;
+			top: 0;
+			z-index: -10;
+		}
+	</style>
 </head>
 
 <body>
@@ -80,37 +71,7 @@ if (!isset($_SESSION['loggedin']))
 			<h2>Result</h2>
 			<p>Found <span class="result-count">0</span> results.</p>
 		</div>
-
-		<!-- <div class="splide">
-			<div class="splide__track">
-				<ul class="splide__list"><!-tempat masuk card-></ul>
-			</div>
-			<div class="splide__progress">
-				<div class="splide__progress__bar"></div>
-			</div> -->
 			<div class="row list-item"></div>
-		<!--<div class="splide__autoplay">
-			<button class="splide__play">Play</button>
-			<button class="splide__pause">Pause</button>
-		</div> -->
-
-		<!-- <script class="scp">
-			var splide = new Splide( '.splide' ,{
-				type        : 'loop',
-				perPage     : 2,
-				autoplay    : true,
-				pauseOnHover: false,
-				trimSpace : false,
-				breakpoints: {
-					640: {
-						perPage: 4,
-					},
-				},
-				//gap        : 10,
-				focus      : 'center',
-				pagination:true,
-			}).mount();
-		</script> -->
 	</div>
 
 </section>
@@ -139,34 +100,15 @@ if (!isset($_SESSION['loggedin']))
 				beforeSend: function () {
 					$("body").addClass('loading');
 					input.addClass('disabled');
-					//$( ".scp" ).unbind();
-					
 				},
 				success: function (res) {
 					$('.list-item').empty();
 					if (res.status == 200) {
 						//  console.log(res.data);
 						$(".result-count").text(res.data.length);
-
-						//if ($('.scp')[0]){
-							//$('.splide__list').empty();
-							//$('.scp').remove();
-						//}
 						$.each(res.data, function (idx, data) {
 							if (data.fld_product_image === '')
 								data.fld_product_image = data.fld_product_id + '.png';
-
-							// $('.splide__list').append(
-							// 	`<li class="splide__slide">
-							// 	<div class="splide__slide__container text-center">
-							// 	<figure class="figure">
-							// 	<img src="products/${data.fld_product_image}" alt="${data.fld_product_name}" style="height: 200px;" class="figure-img img-fluid rounded">
-							// 	<figcaption class="figure-caption">${data.fld_product_name}</figcaption>
-							// 	</figure>
-							// 	<a href="products_details.php?pid=${data.fld_product_id}" class="btn btn-primary" role="button">View</a>
-							// 	</div>
-							// 	</li>
-							// 	`);
 
 							$('.list-item').append(`<div class="col-md-4">
 								<div class="thumbnail thumbnail-dark">
@@ -180,23 +122,6 @@ if (!isset($_SESSION['loggedin']))
 								</div>
 								</div>`);
 						});
-						$( ".scp" ).bind();
-						/*$('.splide__list').append(
-							`<script class="scp">
-							var splide = new Splide( '.splide' ,{
-								type        : 'loop',
-								perPage     : 2,
-								autoplay    : true,
-								pauseOnHover: false,
-								trimSpace : false,
-								breakpoints: {
-									640: {
-										perPage: 4,
-									},
-								},
-								focus      : 'center',
-							}).mount();
-							<\/script>`);*/
 
 							$(".resultList").show("slow", function () {
 								$("body").removeClass('loading');
@@ -220,42 +145,5 @@ if (!isset($_SESSION['loggedin']))
 	});
 
 </script>
-<!-- <script class="scp">
-							var splide = new Splide( '.splide' ,{
-								type        : 'loop',
-								perPage     : 2,
-								autoplay    : true,
-								pauseOnHover: false,
-								trimSpace : false,
-								breakpoints: {
-									640: {
-										perPage: 4,
-									},
-								},
-								//gap        : 10,
-								focus      : 'center',
-								//pagination:false
-							}).mount();
-						</script> -->
-	<!--div id="img">
-		<script type="text/javascript">
-			var bd = document.body;
-			var suns = document.querySelector("#img")
-			function rot(event) {
-				var w = window.innerWidth / 2;
-				var x = event.clientX;
-				if (x > w + 100) {
-					suns.style.transform = "perspective(1000px) rotateY(30deg)";
-				}
-				if (x > w - 100 && x < w + 100) {
-					suns.style.transform = "perspective(1000px) rotateY(0deg)";
-				}
-				if (x < w - 100) {
-					suns.style.transform = "perspective(1000px) rotateY(-30deg)";
-				}
-			}
-			bd.addEventListener("mousemove", rot);
-		</script>
-	</div-->
 </body>
 </html>
