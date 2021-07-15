@@ -20,7 +20,7 @@ include_once 'orders_crud.php';
 				<form action="orders.php" method="post" class="form-horizontal">
 
 					<div class="form-group">
-						<label for="cid" class="col-sm-3 control-label">Order ID</label>
+						<label for="oid" class="col-sm-3 control-label">Order ID</label>
 						<div class="col-sm-9">
 							<input name="oid" type="text" class="form-control" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_order_id']; else echo $num; ?>" required readonly>
 						</div>

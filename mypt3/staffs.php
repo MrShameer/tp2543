@@ -29,14 +29,14 @@ include_once 'staffs_crud.php';
 					<div class="form-group">
 						<label for="name" class="col-sm-3 control-label">Name</label>
 						<div class="col-sm-9">
-							<input name="name" placeholder="Staff Name" type="text" class="form-control" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_name']; ?>"required>
+							<input id="name" name="name" placeholder="Staff Name" type="text" class="form-control" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_name']; ?>"required>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="phoneno" class="col-sm-3 control-label">Phone Number</label>
 						<div class="col-sm-9">
-							<input name="phoneno" placeholder="Staff Phone" type="text" class="form-control" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_phoneno']; ?>"required>
+							<input id="phoneno" name="phoneno" placeholder="Staff Phone" type="text" class="form-control" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_phoneno']; ?>"required>
 						</div>
 					</div>
 

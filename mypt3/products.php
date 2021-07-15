@@ -59,13 +59,13 @@ include_once 'products_crud.php';
 						<label for="productbrand" class="col-sm-3 control-label">Brand</label>
 						<div class="col-sm-9">
 							<select name="brand" class="form-control" id="productbrand">
-								<option value="Hasbro" <?php if(isset($_GET['edit'])) if($editrow['fld_product_type']=="Hasbro") echo "selected"; ?>>Hasbro</option>
-								<option value="Lego" <?php if(isset($_GET['edit'])) if($editrow['fld_product_type']=="Lego") echo "selected"; ?>>Lego</option>
-								<option value="Knex" <?php if(isset($_GET['edit'])) if($editrow['fld_product_type']=="Knex") echo "selected"; ?>>Knex</option>
-								<option value="ToysRUs" <?php if(isset($_GET['edit'])) if($editrow['fld_product_type']=="ToysRUs") echo "selected"; ?>>ToysRUs</option>
-								<option value="Nintendo" <?php if(isset($_GET['edit'])) if($editrow['fld_product_type']=="Nintendo") echo "selected"; ?>>Nintendo</option>
-								<option value="Playmobil" <?php if(isset($_GET['edit'])) if($editrow['fld_product_type']=="Playmobil") echo "selected"; ?>>Playmobil</option>
-								<option value="Other" <?php if(isset($_GET['edit'])) if($editrow['fld_product_type']=="Other") echo "selected"; ?>>Other</option>
+								<option value="Hasbro" <?php if(isset($_GET['edit'])) if($editrow['fld_product_brand']=="Hasbro") echo "selected"; ?>>Hasbro</option>
+								<option value="Lego" <?php if(isset($_GET['edit'])) if($editrow['fld_product_brand']=="Lego") echo "selected"; ?>>Lego</option>
+								<option value="Knex" <?php if(isset($_GET['edit'])) if($editrow['fld_product_brand']=="Knex") echo "selected"; ?>>Knex</option>
+								<option value="ToysRUs" <?php if(isset($_GET['edit'])) if($editrow['fld_product_brand']=="ToysRUs") echo "selected"; ?>>ToysRUs</option>
+								<option value="Nintendo" <?php if(isset($_GET['edit'])) if($editrow['fld_product_brand']=="Nintendo") echo "selected"; ?>>Nintendo</option>
+								<option value="Playmobil" <?php if(isset($_GET['edit'])) if($editrow['fld_product_brand']=="Playmobil") echo "selected"; ?>>Playmobil</option>
+								<option value="Other" <?php if(isset($_GET['edit'])) if($editrow['fld_product_brand']=="Other") echo "selected"; ?>>Other</option>
 							</select> 
 						</div>
 					</div>
@@ -85,13 +85,13 @@ include_once 'products_crud.php';
 						<label for="productmat" class="col-sm-3 control-label">Material</label>
 						<div class="col-sm-9">
 							<select name="material" class="form-control" id="productmat">
-								<option value="Plastic">Plastic</option>
-								<option value="Metal">Metal</option>
-								<option value="Flexible Plastic">Flexible Plastic</option>
-								<option value="Paper">Paper</option>
-								<option value="Fur">Fur</option>
-								<option value="CD">CD</option>
-								<option value="Other">Other</option>
+								<option value="Plastic" <?php if(isset($_GET['edit'])) if($editrow['fld_product_material']=="Plastic") echo "selected"; ?>>Plastic</option>
+								<option value="Metal" <?php if(isset($_GET['edit'])) if($editrow['fld_product_material']=="Metal") echo "selected"; ?>>Metal</option>
+								<option value="Flexible Plastic" <?php if(isset($_GET['edit'])) if($editrow['fld_product_material']=="Flexible Plastic") echo "selected"; ?>>Flexible Plastic</option>
+								<option value="Paper" <?php if(isset($_GET['edit'])) if($editrow['fld_product_material']=="Paper") echo "selected"; ?>>Paper</option>
+								<option value="Fur" <?php if(isset($_GET['edit'])) if($editrow['fld_product_material']=="Fur") echo "selected"; ?>>Fur</option>
+								<option value="CD" <?php if(isset($_GET['edit'])) if($editrow['fld_product_material']=="CD") echo "selected"; ?>>CD</option>
+								<option value="Other" <?php if(isset($_GET['edit'])) if($editrow['fld_product_material']=="Other") echo "selected"; ?>>Other</option>
 							</select> 
 						</div>
 					</div>

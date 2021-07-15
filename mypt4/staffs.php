@@ -12,7 +12,7 @@ include_once 'staffs_crud.php';
 </head>
 <body>
 	<div class="container-fluid">
-		<?php if($_SESSION['user']['fld_staff_role'] == 'Staff'){ ?>
+		<?php if($_SESSION['user']['fld_staff_role'] == 'Admin'){ ?>
 		<div class="row" id="form">
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 				<div class="page-header">
@@ -35,16 +35,57 @@ include_once 'staffs_crud.php';
 					<div class="form-group">
 						<label for="name" class="col-sm-3 control-label">Name</label>
 						<div class="col-sm-9">
-							<input name="name" placeholder="Staff Name" type="text" class="form-control" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_name']; ?>"required>
+							<input id="name" name="name" placeholder="Staff Name" type="text" class="form-control" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_name']; ?>"required>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="phoneno" class="col-sm-3 control-label">Phone Number</label>
 						<div class="col-sm-9">
-							<input name="phoneno" placeholder="Staff Phone" type="text" class="form-control" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_phoneno']; ?>"required>
+							<input id="phoneno" name="phoneno" placeholder="Staff Phone" type="text" class="form-control" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_phoneno']; ?>"required>
 						</div>
 					</div>
+
+					<div class="form-group">
+						<label for="role" class="col-sm-3 control-label">Role</label>
+						<div class="col-sm-9">
+							<select name="role" class="form-control" id="role" required>
+								<option value="Admin" <?php if(isset($_GET['edit'])) if($editrow['fld_staff_role']=="Admin") echo "selected"; ?>>Admin</option>
+								<option value="Staff" <?php if(isset($_GET['edit'])) if($editrow['fld_staff_role']=="Staff") echo "selected"; ?>>Staff</option>
+							</select> 
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="email" class="col-sm-3 control-label">Email</label>
+						<div class="col-sm-9">
+							<input id="email" name="email" placeholder="Staff Email" type="text" class="form-control" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_email']; ?>"required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="pass" class="col-sm-3 control-label">Password</label>
+						<div class="col-sm-9">
+							<input id="pass" name="pass" placeholder="Staff Password" type="password" class="form-control" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_password']; ?>"required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="confirmpass" class="col-sm-3 control-label">Confirm Password</label>
+						<div class="col-sm-9">
+							<input id="confirmpass" name="confirmpass" placeholder="Confirm Password" type="password" class="form-control" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_staff_password']; ?>"required>
+							<span id='message'></span>
+						</div>
+					</div>
+					<!-- saja je letak confirm pass -->
+					<script type="text/javascript">
+						$('#pass, #confirmpass').on('keyup', function () {
+							if ($('#pass').val() == $('#confirmpass').val()) {
+								$('#message').html('Matching').css('color', 'green');
+							} else
+								$('#message').html('Not Matching').css('color', 'red');
+							});
+					</script>
 
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-9">
@@ -79,6 +120,8 @@ include_once 'staffs_crud.php';
 						<th>Staff ID</th>
 						<th>Name</th>
 						<th>Phone Number</th>
+						<th>Email</th>
+						<th>Role</th>
 						<?php
 							if($_SESSION['user']['fld_staff_role'] == 'Admin') echo '<th></th>'
 						?>
@@ -106,6 +149,8 @@ include_once 'staffs_crud.php';
 							<td><?php echo $readrow['fld_staff_id']; ?></td>
 							<td><?php echo $readrow['fld_staff_name']; ?></td>
 							<td><?php echo $readrow['fld_staff_phoneno']; ?></td>
+							<td><?php echo $readrow['fld_staff_email']; ?></td>
+							<td><?php echo $readrow['fld_staff_role']; ?></td>
 							<?php
 								if($_SESSION['user']['fld_staff_role'] == 'Admin'){ ?>
 									<td>

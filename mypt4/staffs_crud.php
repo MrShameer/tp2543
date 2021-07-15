@@ -6,15 +6,21 @@ if (!isset($_SESSION['loggedin']))
 if (isset($_POST['create'])) {
 	if (isset($_SESSION['user']) && $_SESSION['user']['fld_staff_role'] == 'Admin') {
 		try {
-			$stmt = $conn->prepare("INSERT INTO tbl_staffs_a173586(fld_staff_id, fld_staff_name, fld_staff_phoneno) VALUES(:sid, :name, :phoneno)");
+			$stmt = $conn->prepare("INSERT INTO tbl_staffs_a173586(fld_staff_id, fld_staff_name, fld_staff_phoneno, fld_staff_email, fld_staff_password, fld_staff_role) VALUES(:sid, :name, :phoneno, :email, :pass, :role)");
 
 			$stmt->bindParam(':sid', $sid, PDO::PARAM_STR);
 			$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 			$stmt->bindParam(':phoneno', $phoneno, PDO::PARAM_STR);
+			$stmt->bindParam(':email', $email, PDO::PARAM_STR);
+			$stmt->bindParam(':pass', $pass, PDO::PARAM_STR);
+			$stmt->bindParam(':role', $role, PDO::PARAM_STR);
 
 			$sid = $_POST['sid'];
 			$name = $_POST['name'];
 			$phoneno = $_POST['phoneno'];
+			$email = $_POST['email'];
+			$pass = $_POST['pass'];
+			$role = $_POST['role'];
 
 			$stmt->execute();
 		}
@@ -34,17 +40,23 @@ if (isset($_POST['update'])) {
 	if (isset($_SESSION['user']) && $_SESSION['user']['fld_staff_role'] == 'Admin') {
 		try {
 			$stmt = $conn->prepare("UPDATE tbl_staffs_a173586 SET
-				fld_staff_id = :sid, fld_staff_name = :name, fld_staff_phoneno = :phoneno
+				fld_staff_id = :sid, fld_staff_name = :name, fld_staff_phoneno = :phoneno, fld_staff_email = :email, fld_staff_password = :pass, fld_staff_role = :role
 				WHERE fld_staff_id = :oldsid");
 
 			$stmt->bindParam(':sid', $sid, PDO::PARAM_STR);
 			$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 			$stmt->bindParam(':phoneno', $phoneno, PDO::PARAM_STR);
+			$stmt->bindParam(':email', $email, PDO::PARAM_STR);
+			$stmt->bindParam(':pass', $pass, PDO::PARAM_STR);
+			$stmt->bindParam(':role', $role, PDO::PARAM_STR);
 			$stmt->bindParam(':oldsid', $oldsid, PDO::PARAM_STR);
 
 			$sid = $_POST['sid'];
 			$name = $_POST['name'];
 			$phoneno = $_POST['phoneno'];
+			$email = $_POST['email'];
+			$pass = $_POST['pass'];
+			$role = $_POST['role'];
 			$oldsid = $_POST['oldsid'];
 
 			$stmt->execute();

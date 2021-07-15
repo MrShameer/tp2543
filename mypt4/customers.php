@@ -12,7 +12,7 @@ include_once 'customers_crud.php';
 </head>
 <body>
 	<div class="container-fluid">
-		<?php if($_SESSION['user']['fld_staff_role'] == 'Staff'){ ?>
+		<?php if($_SESSION['user']['fld_staff_role'] == 'Admin'){ ?>
 		<div class="row" id="form">
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 				<div class="page-header">
@@ -28,7 +28,7 @@ include_once 'customers_crud.php';
 					<div class="form-group">
 						<label for="cid" class="col-sm-3 control-label">Customer ID</label>
 						<div class="col-sm-9">
-							<input name="cid" type="text" class="form-control" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_id']; else echo $num; ?>" required readonly>
+							<input name="cid" type="text" class="form-control" id="cid" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_id']; else echo $num; ?>" required readonly>
 						</div>
 					</div>
 

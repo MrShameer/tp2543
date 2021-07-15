@@ -16,7 +16,7 @@ include_once 'database.php';
 			</button>
 			<a class="navbar-brand" href="./">Hypers</a>
 		</div>
-		<div class="navbar-brand" id="role"><?php echo $_SESSION['user']['fld_staff_role'].' : '.$_SESSION['user']['fld_staff_name']?></div>
+		<div class="navbar-brand" id="roles"><?php echo $_SESSION['user']['fld_staff_role'].' : '.$_SESSION['user']['fld_staff_name']?></div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="products.php">Products</a></li>
