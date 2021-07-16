@@ -116,7 +116,7 @@ if (isset($_GET['edit'])) {
 		exit();
 	}
 }
-
+//coding ni tk perlu guna. ni untuk aku punye auto increment je
 $num = $conn->query("SELECT MAX(fld_staff_id) AS pid FROM tbl_staffs_a173586")->fetch()['pid'];
 
 if ($num){

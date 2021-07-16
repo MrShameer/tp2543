@@ -203,7 +203,7 @@ if (isset($_GET['edit'])) {
 		exit();
 	}
 }
-
+//coding ni tk perlu guna. ni untuk aku punye auto increment je
 $num = $conn->query("SELECT MAX(fld_product_id) AS pid FROM tbl_products_a173586")->fetch()['pid'];
 if ($num){
 	$num = ltrim($num, 'P')+1;
