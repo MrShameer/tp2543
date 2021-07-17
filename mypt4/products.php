@@ -267,6 +267,7 @@ include_once 'products_crud.php';
 		document.getElementById('productImageTitle').innerText = event.target.files[0]['name'];
 	};
 
+	//yg ni korg tk perlu
 	$(document).ready(function () {
 		$("#productlist").DataTable({
 		"lengthMenu": [[5, 20, 50, -1], [5, 20, 50, "All"]]
