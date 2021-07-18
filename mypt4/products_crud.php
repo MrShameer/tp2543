@@ -56,7 +56,7 @@ if (isset($_POST['create'])) {
 				$description = $_POST['description'];
 				$quantity = $_POST['quantity'];
 				$material = $_POST['material'];
-		//$image = $_POST['image'];
+				//$image = $_POST['image'];
 				$stmt->execute();
 			}
 			catch(PDOException $e){
