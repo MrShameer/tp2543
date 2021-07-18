@@ -39,7 +39,7 @@ include_once 'products_crud.php';
 					<div class="form-group">
 						<label for="productprice" class="col-sm-3 control-label">Price</label>
 						<div class="col-sm-9">
-							<input name="price" class="form-control" type="text" placeholder="Product Price" id="productprice" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_price']; ?>" required> 
+							<input name="price" class="form-control" type="number" placeholder="Product Price" id="productprice" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_price']; ?>" required> 
 						</div>
 					</div>
 					<div class="form-group">
@@ -161,14 +161,14 @@ include_once 'products_crud.php';
 							<td><?php echo $readrow['fld_product_description']; ?></td>
 							<td><?php echo $readrow['fld_product_quantity']; ?></td>
 							<td><?php echo $readrow['fld_product_material']; ?></td>
-							<?php if(file_exists('products/'. $readrow['fld_product_id'].'.jpg')){
-								$img = 'products/'.$readrow['fld_product_id'].'.jpg';
-								echo '<td><img data-toggle="modal" data-target="#'.$readrow['fld_product_id'].'" width=70%; src="products/'.$readrow['fld_product_id'].'.jpg"'.'></td>';
+							<?php if(file_exists('products/'. $readrow['fld_product_image']) && isset($readrow['fld_product_image'])){
+								$img = 'products/'.$readrow['fld_product_image'];
+								echo '<td><img data-toggle="modal" data-target="#'.$readrow['fld_product_id'].'" width=70%; src="'.$img.'"></td>';
 							}
 							else{
 								$img = 'products/nophoto.jpg';
 								echo '<td><img width=70%; data-toggle="modal" data-target="#'.$readrow['fld_product_id'].'" src="products/nophoto.jpg"'.'></td>';
-							}?>
+							} ?>
 
 							<!--ni haa tuk kluar gmbr tu-->
 							<div id="<?php echo $readrow['fld_product_id']?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

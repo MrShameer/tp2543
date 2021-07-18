@@ -211,14 +211,13 @@ include_once 'products_crud.php';
 							<!-- <td><?php //echo $readrow['fld_product_description']; ?></td> -->
 							<td><?php echo $readrow['fld_product_quantity']; ?></td>
 							<td><?php echo $readrow['fld_product_material']; ?></td>
-							<?php if(file_exists('products/'. $readrow['fld_product_image'])){
+							<?php if(file_exists('products/'. $readrow['fld_product_image']) && isset($readrow['fld_product_image'])){
 								$img = 'products/'.$readrow['fld_product_image'];
-								echo '<td><img data-toggle="modal" data-target="#'.$readrow['fld_product_id'].'" width=150px; src="products/'.$readrow['fld_product_image'].'"></td>';
+								echo '<td><img data-toggle="modal" data-target="#'.$readrow['fld_product_id'].'" width=150px; src="'.$img.'"></td>';
 							}
 							else{
-								$img = 'products/nophoto.jpg';
 								echo '<td><img width=70%; data-toggle="modal" data-target="#'.$readrow['fld_product_id'].'" src="products/nophoto.jpg"'.'></td>';
-							}?>
+							} ?>
 
 							<div id="<?php echo $readrow['fld_product_id']?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog modal-body">
