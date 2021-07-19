@@ -127,7 +127,7 @@ include_once 'products_crud.php';
 						<th>Price</th>
 						<th>Type</th>
 						<th>Brand</th>
-						<th>Description</th>
+						<!-- <th>Description</th> -->
 						<th>Quantity</th>
 						<th>Material</th>
 						<th>Imange</th>
@@ -158,16 +158,16 @@ include_once 'products_crud.php';
 							<td><?php echo 'RM'.$readrow['fld_product_price']; ?></td>
 							<td><?php echo $readrow['fld_product_type']; ?></td>
 							<td><?php echo $readrow['fld_product_brand']; ?></td>
-							<td><?php echo $readrow['fld_product_description']; ?></td>
+							<!-- <td><?php //echo $readrow['fld_product_description']; ?></td> -->
 							<td><?php echo $readrow['fld_product_quantity']; ?></td>
 							<td><?php echo $readrow['fld_product_material']; ?></td>
 							<?php if(file_exists('products/'. $readrow['fld_product_image']) && isset($readrow['fld_product_image'])){
 								$img = 'products/'.$readrow['fld_product_image'];
-								echo '<td><img data-toggle="modal" data-target="#'.$readrow['fld_product_id'].'" width=70%; src="'.$img.'"></td>';
+								echo '<td><img data-toggle="modal" data-target="#'.$readrow['fld_product_id'].'" width=150px; src="'.$img.'"></td>';
 							}
 							else{
 								$img = 'products/nophoto.jpg';
-								echo '<td><img width=70%; data-toggle="modal" data-target="#'.$readrow['fld_product_id'].'" src="products/nophoto.jpg"'.'></td>';
+								echo '<td><img width=150px; data-toggle="modal" data-target="#'.$readrow['fld_product_id'].'" src="products/nophoto.jpg"'.'></td>';
 							} ?>
 
 							<!--ni haa tuk kluar gmbr tu-->
