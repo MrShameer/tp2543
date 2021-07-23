@@ -89,7 +89,7 @@ if (!isset($_SESSION['loggedin']))
 		input.parent().removeClass('has-error');
 		input.parent().find("#helpBlock2").text("");
 
-		if (val.length > 2) {
+		if (val.length > 0) {
 			//&& (val.split(" ").length==1 || val.split(" ").length==3)
 			$.ajax({
 				url: 'search.php',
@@ -111,14 +111,16 @@ if (!isset($_SESSION['loggedin']))
 							if (data.fld_product_image === '')
 								data.fld_product_image = data.fld_product_id + '.png';
 
-							$('.list-item').append(`<div class="col-md-4">
+							$('.list-item').append(`<div class="col-md-12">
+								<div class="col-md-4 col-md-offset-4">
 								<div class="thumbnail thumbnail-dark">
-								<img src="products/${data.fld_product_image}" alt="${data.fld_product_name}" style="height: 345px;">
+								<img src="products/${data.fld_product_image}" alt="${data.fld_product_name}" style="width: 100px;">
 								<div class="caption text-center">
 								<h3>${data.fld_product_name}</h3>
 								<p>
 								<a href="products_details.php?pid=${data.fld_product_id}" class="btn btn-primary" role="button">View</a>
 								</p>
+								</div>
 								</div>
 								</div>
 								</div>`);

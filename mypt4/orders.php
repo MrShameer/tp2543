@@ -38,28 +38,36 @@ include_once 'orders_crud.php';
 					<div class="form-group">
 						<label for="sid" class="col-sm-3 control-label">Staff</label>
 						<div class="col-sm-9">
-							<select name="sid" class="form-control" id="sid">
+							<select name="sid" class="form-control" id="sid" required>
 								<?php
-								try {
-									$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-									$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-									$stmt = $conn->prepare("SELECT * FROM tbl_staffs_a173586");
-									$stmt->execute();
-									$result = $stmt->fetchAll();
-								}
-								catch(PDOException $e){
-									echo "Error: " . $e->getMessage();
-								}
-								foreach($result as $staffrow) {
-									?>
-
-									<?php if((isset($_GET['edit'])) && ($editrow['fld_staff_id']==$staffrow['fld_staff_id'])) { ?>
-										<option value="<?php echo $staffrow['fld_staff_id']; ?>" selected><?php echo $staffrow['fld_staff_name'];?></option>
-									<?php } else { ?>
-										<option value="<?php echo $staffrow['fld_staff_id']; ?>"><?php echo $staffrow['fld_staff_name'];?></option>
-									<?php } ?>
-									<?php
-								} // while
+									if(isset($_SESSION['user']) && $_SESSION['user']['fld_staff_role'] == 'Admin'){
+										try {
+											$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+											$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+											$stmt = $conn->prepare("SELECT * FROM tbl_staffs_a173586");
+											$stmt->execute();
+											$result = $stmt->fetchAll();
+										}
+										catch(PDOException $e){
+											echo "Error: " . $e->getMessage();
+										}
+										 ?>
+										<option value="">Select Staff</option>
+										<?php 
+											foreach($result as $staffrow) {
+												?>
+												<?php if((isset($_GET['edit'])) && ($editrow['fld_staff_id']==$staffrow['fld_staff_id'])) { ?>
+													<option value="<?php echo $staffrow['fld_staff_id']; ?>" selected><?php echo $staffrow['fld_staff_name'];?></option>
+												<?php } else { ?>
+													<option value="<?php echo $staffrow['fld_staff_id']; ?>"><?php echo $staffrow['fld_staff_name'];?></option>
+												<?php } ?>
+												<?php
+											}
+									}
+									else{ ?>
+									<option value="<?php echo $_SESSION['user']['fld_staff_id']; ?>"><?php echo $_SESSION['user']['fld_staff_name'];?></option>
+								<?php }
+								
 								$conn = null;
 								?> 
 							</select> 
@@ -71,7 +79,8 @@ include_once 'orders_crud.php';
 					<div class="form-group">
 						<label for="cid" class="col-sm-3 control-label">Customer</label>
 						<div class="col-sm-9">
-							<select name="cid" class="form-control" id="cid">
+							<select name="cid" class="form-control" id="cid" required>
+								<option value="">Select Customer</option>
 								<?php
 								try {
 									$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

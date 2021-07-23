@@ -65,7 +65,8 @@ include_once 'products_crud.php';
 							<div class="form-group">
 								<label for="producttype" class="col-sm-3 control-label">Type</label>
 								<div class="col-sm-9">
-									<select name="type" class="form-control" id="producttype">
+									<select name="type" class="form-control" id="producttype" required>
+										<option value="">Select Type</option>
 										<option value="Action Figure" <?php if(isset($_GET['edit'])) if($editrow['fld_product_type']=="Action Figure") echo "selected"; ?>>Action Figure</option>
 										<option value="Building" <?php if(isset($_GET['edit'])) if($editrow['fld_product_type']=="Building") echo "selected"; ?>>Building</option>
 										<option value="Vehicle" <?php if(isset($_GET['edit'])) if($editrow['fld_product_type']=="Vehicle") echo "selected"; ?>>Vehicle</option>
@@ -78,7 +79,8 @@ include_once 'products_crud.php';
 							<div class="form-group">
 								<label for="productbrand" class="col-sm-3 control-label">Brand</label>
 								<div class="col-sm-9">
-									<select name="brand" class="form-control" id="productbrand">
+									<select name="brand" class="form-control" id="productbrand" required>
+										<option value="">Select Brand</option>
 										<option value="Hasbro" <?php if(isset($_GET['edit'])) if($editrow['fld_product_brand']=="Hasbro") echo "selected"; ?>>Hasbro</option>
 										<option value="Lego" <?php if(isset($_GET['edit'])) if($editrow['fld_product_brand']=="Lego") echo "selected"; ?>>Lego</option>
 										<option value="Knex" <?php if(isset($_GET['edit'])) if($editrow['fld_product_brand']=="Knex") echo "selected"; ?>>Knex</option>
@@ -104,7 +106,8 @@ include_once 'products_crud.php';
 							<div class="form-group">
 								<label for="productmat" class="col-sm-3 control-label">Material</label>
 								<div class="col-sm-9">
-									<select name="material" class="form-control" id="productmat">
+									<select name="material" class="form-control" id="productmat" required>
+										<option value="">Select Material</option>
 										<option value="Plastic" <?php if(isset($_GET['edit'])) if($editrow['fld_product_material']=="Plastic") echo "selected"; ?>>Plastic</option>
 										<option value="Metal" <?php if(isset($_GET['edit'])) if($editrow['fld_product_material']=="Metal") echo "selected"; ?>>Metal</option>
 										<option value="Flexible Plastic" <?php if(isset($_GET['edit'])) if($editrow['fld_product_material']=="Flexible Plastic") echo "selected"; ?>>Flexible Plastic</option>

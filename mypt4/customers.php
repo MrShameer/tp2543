@@ -12,7 +12,7 @@ include_once 'customers_crud.php';
 </head>
 <body>
 	<div class="container-fluid">
-		<?php if($_SESSION['user']['fld_staff_role'] == 'Admin'){ ?>
+		
 		<div class="row" id="form">
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 				<div class="page-header">
@@ -88,7 +88,7 @@ include_once 'customers_crud.php';
 				//echo '<script>$("form :input").prop("disabled", true);</script>';
 			}*/
 		?> -->
-		<?php } ?>
+		
 		<div class="row">
 			<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 				<div class="page-header">
