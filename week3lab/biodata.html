@@ -14,7 +14,7 @@ Name: Mohamed Shameer Ali
   <table border="1" cellpadding="10">
     <tr>
       <td>Name:</td>
-      <td><input type="text" name="name" placeholder="Insert your name" autofocus required=""></td>
+      <td><input type="text" name="name" pattern="[A-Z()]+" placeholder="Insert your name" autofocus required=""></td>
     </tr>
     <tr>
       <td>Age:</td>
@@ -38,7 +38,7 @@ Name: Mohamed Shameer Ali
     </tr>
     <tr>
       <td>Height:</td>
-      <td><input type="range" name="height" id="heightId" min = "100" max = "200" value = "150" oninput="outputId.value = heightId.value" required=""><output id="outputId">150</output>cm
+      <td><input type="range" name="height" id="heightId" min = "100" max = "200" value = "150" oninput="outputId.value = heightId.value" required="" disabled=""><output id="outputId">150</output>cm
     </tr>
     <tr>
       <td>Tel:</td>
